@@ -8,15 +8,16 @@
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"test": "vitest run",
-		"testall": "vitest",
 		"prepare": "husky install"
 	},
 	"dependencies": {
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.3.0"
+		"react-router-dom": "^6.3.0",
+		"tailwind-styled-components": "^2.1.8"
 	},
 	"devDependencies": {
+		"@tailwindcss/forms": "^0.5.2",
 		"@testing-library/react": "^13.3.0",
 		"@testing-library/user-event": "^14.3.0",
 		"@types/react": "^18.0.15",
@@ -24,6 +25,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.30.7",
 		"@typescript-eslint/parser": "^5.30.7",
 		"@vitejs/plugin-react": "^2.0.0",
+		"autoprefixer": "^10.4.8",
 		"eslint": "^8.20.0",
 		"eslint-config-airbnb": "^19.0.4",
 		"eslint-config-prettier": "^8.5.0",
@@ -35,7 +37,9 @@
 		"husky": "^8.0.0",
 		"jsdom": "^20.0.0",
 		"lint-staged": "^13.0.3",
+		"postcss": "^8.4.16",
 		"prettier": "^2.7.1",
+		"tailwindcss": "^3.1.8",
 		"typescript": "^4.6.4",
 		"vite": "^3.0.0",
 		"vitest": "^0.18.1"
