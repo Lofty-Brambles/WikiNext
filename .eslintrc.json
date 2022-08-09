@@ -22,6 +22,8 @@
 			1,
 			{ "js": "never", "ts": "never", "tsx": "never" }
 		],
+		"import/no-extraneous-dependencies": "off",
+		"react/function-component-definition": "off",
 
 		"init-declarations": ["error", "always"],
 		"no-console": "warn",
