@@ -7,7 +7,6 @@ import Landing from "./pages/Landing";
 import Display from "./pages/Display";
 import { fs } from "./firebase/firebase-init";
 import { fsSnap } from "./types/fsSnap";
-import Error404 from "./components/Error404";
 
 const Routing = () => {
 	const [fsSnapshot, loadStat] = useList(ref(fs));
