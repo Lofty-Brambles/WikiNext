@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import { ref } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
-import { ChevronDown, ChevronLeft, ChevronRight } from "react-feather";
+import { ChevronLeft, ChevronRight } from "react-feather";
 import { fs } from "../../../firebase/firebase-init";
 import { fsSnap } from "../../../types";
+import NavDropdown from "../NavDropdown";
 
 const ContentNav = () => {
 	const [snap, load, err] = useObjectVal<fsSnap>(ref(fs));
@@ -55,13 +56,7 @@ const ContentNav = () => {
 							ref={reference}
 						>
 							{Object.keys(snap).map(ele => (
-								<button
-									type="button"
-									className="inline-flex justify-center font-serif p-2 m-2 rounded-lg hover:bg-teal-600 whitespace-nowrap focus:outline-none focus:border-2 focus:border-white"
-								>
-									{ele}&nbsp;
-									<ChevronDown />
-								</button>
+								<NavDropdown content={ele} dir={snap} />
 							))}
 						</div>
 						<button
