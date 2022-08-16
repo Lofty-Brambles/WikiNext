@@ -1,16 +1,27 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { ref } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import { fs } from "../../../firebase/firebase-init";
 import { fsSnap } from "../../../types";
 import NavDropdown from "../NavDropdown";
+import useStore from "../../../store";
 
 const ContentNav = () => {
 	const [snap, load, err] = useObjectVal<fsSnap>(ref(fs));
 	const reference = useRef<HTMLDivElement>(null);
 	const leftTimer = useRef<NodeJS.Timer>();
 	const rightTimer = useRef<NodeJS.Timer>();
+
+	const initDropdownStates = useStore(state => state.initDropdownStates);
+	const turnOffDrops = useStore(state => state.turnoffDrops);
+
+	useEffect(() => {
+		if (snap !== undefined)
+			initDropdownStates(
+				Object.fromEntries(Object.keys(snap).map(key => [key, false]))
+			);
+	}, [snap]);
 
 	const scroll = (val: "l" | "r") => {
 		if (val === "l" && reference !== null)
@@ -44,6 +55,7 @@ const ContentNav = () => {
 							className="h-fit p-2 rounded-full hover:bg-teal-600 focus:outline-none focus:border-2 focus:border-white"
 							onMouseDown={() => {
 								leftTimer.current = scroll("l");
+								turnOffDrops();
 							}}
 							onMouseUp={() => {
 								clearInterval(leftTimer.current);
@@ -56,7 +68,7 @@ const ContentNav = () => {
 							ref={reference}
 						>
 							{Object.keys(snap).map(ele => (
-								<NavDropdown content={ele} dir={snap} />
+								<NavDropdown key={ele} content={ele} dir={snap} />
 							))}
 						</div>
 						<button
@@ -65,6 +77,7 @@ const ContentNav = () => {
 							className="h-fit p-2 rounded-full hover:bg-teal-600 focus:outline-none focus:border-2 focus:border-white"
 							onMouseDown={() => {
 								rightTimer.current = scroll("r");
+								turnOffDrops();
 							}}
 							onMouseUp={() => {
 								clearInterval(rightTimer.current);

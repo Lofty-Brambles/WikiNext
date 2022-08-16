@@ -73,20 +73,20 @@ const ThreeBtn = ({ prop, toggleFunction, IconP, name }: PropsThreeBtn) => (
 );
 
 const CustomMenu = () => {
-	const toggleFont: () => void = useStore(state => state.toggleFont);
-	const toggleDarkMode: () => void = useStore(state => state.toggleDarkMode);
-	const toggleJustify: () => void = useStore(state => state.toggleJustify);
+	const toggleFont = useStore(state => state.toggleFont);
+	const toggleDarkMode = useStore(state => state.toggleDarkMode);
+	const toggleJustify = useStore(state => state.toggleJustify);
 
-	const textSize: "sm" | "md" | "lg" = useStore(
+	const textSize = useStore(
 		state => state.customFormDtls.textSize
 	);
-	const toggleTextSize: (val: "sm" | "md" | "lg") => void = useStore(
+	const toggleTextSize = useStore(
 		state => state.toggleTextSize
 	);
-	const sideSpace: "sm" | "md" | "lg" = useStore(
+	const sideSpace = useStore(
 		state => state.customFormDtls.sideSpace
 	);
-	const toggleSideSpace: (val: "sm" | "md" | "lg") => void = useStore(
+	const toggleSideSpace = useStore(
 		state => state.toggleSideSpace
 	);
 

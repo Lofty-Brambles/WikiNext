@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, ExternalLink } from "react-feather";
 import { Link } from "react-router-dom";
+import useStore from "../../../store";
 import { fsSnap } from "../../../types";
 
 type Props = {
@@ -18,11 +19,19 @@ const NavDropdown = ({ content, dir }: Props) => {
 			setListWidth(reference.current?.offsetWidth);
 	});
 
+	const dropdownMenuStates = useStore(state => state.dropdownMenuStates);
+	const turnoffDropsExceptOne = useStore(state => state.turnoffDropsExceptOne);
+
 	const toggleOptionState = () => {
 		setIsOptionsOpen(s => !s);
 	};
 
-	const handleBtnKeyDown = e => {};
+	const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLUListElement | HTMLButtonElement>) => {
+		if (e.key === "Escape") {
+			e.preventDefault();
+			setIsOptionsOpen(false);
+		}
+	};
 
 	return (
 		<div>
@@ -32,8 +41,10 @@ const NavDropdown = ({ content, dir }: Props) => {
 				aria-expanded={isOptionsOpen}
 				ref={reference}
 				onClick={toggleOptionState}
-				onKeyDown={handleBtnKeyDown}
-				className={`relative inline-flex justify-center font-serif p-2 mx-2 mt-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-none focus:border-2 focus:border-white ${
+				onKeyDown={(e) => {
+					handleBtnKeyDown(e);
+				}}
+				className={`relative inline-flex justify-center font-serif p-2 mx-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-none focus:border-2 focus:border-white ${
 					isOptionsOpen ? "border-2 border-white bg-teal-600" : ""
 				}`}
 			>
@@ -50,11 +61,11 @@ const NavDropdown = ({ content, dir }: Props) => {
 				onKeyDown={handleBtnKeyDown}
 			>
 				{Object.keys(dir[content]).map(page => (
-					<li id={page}>
+					<li key={page} id={page}>
 						<Link
 							to={`/${encodeURIComponent(page)}`}
 							tabIndex={0}
-							className="flex justify-center align-middle p-1 last:rounded outline-none focus:text-black"
+							className="flex justify-center align-middle p-1 last:rounded outline-none focus:text-black hover:bg-teal-800"
 						>
 							{page}&nbsp;
 							<ExternalLink />

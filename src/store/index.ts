@@ -73,10 +73,35 @@ const createCustomFormState = (set: ZustandSetFnType) => ({
 		})),
 });
 
+const createDropdownMenuStates = (set: ZustandSetFnType) => ({
+	dropdownMenuStates: {} as { [name: string]: boolean },
+	initDropdownStates: (value: { [name: string]: boolean }) =>
+		set((state: Global) => ({ ...state, dropdownMenuStates: value })),
+	turnoffDrops: () =>
+		set((state: Global) => ({
+			...state,
+			dropdownMenuStates: Object.fromEntries(
+				Object.keys(state.dropdownMenuStates).map(key => [key, false])
+			),
+		})),
+	turnoffDropsExceptOne: (val: string) =>
+		set((state: Global) => ({
+			...state,
+			dropdownMenuStates: Object.fromEntries(
+				Object.keys(state.dropdownMenuStates).map(key =>
+					key === val
+						? [key, state.dropdownMenuStates[key]]
+						: [key, false]
+				)
+			),
+		})),
+});
+
 const useStore = create<Global>()(set => ({
 	...createSideBarState(set),
 	...createCustomizationsState(set),
 	...createCustomFormState(set),
+	...createDropdownMenuStates(set),
 }));
 
 export default useStore;

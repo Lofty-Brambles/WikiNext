@@ -18,6 +18,11 @@ interface Global {
 	toggleTextSize: (input: "sm" | "md" | "lg") => void;
 	toggleSideSpace: (input: "sm" | "md" | "lg") => void;
 	toggleJustify: () => void;
+
+	dropdownMenuStates: { [name: string]: boolean };
+	initDropdownStates: (value: { [name: string]: boolean }) => void;
+	turnoffDrops: () => void;
+	turnoffDropsExceptOne: (val: string) => void;
 }
 
 type ZustandSetFnType = (
