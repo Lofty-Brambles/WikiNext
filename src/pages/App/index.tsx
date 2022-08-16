@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import HeroHead from "../../components/NavBar/HeroHead";
-import Sidebar from "../../components/NavBar/SideBar";
+import Sidebar from "../../components/SideBar";
 
 const App = () => (
 	<>
