@@ -10,7 +10,6 @@ type Props = {
 };
 
 const NavDropdown = ({ content, dir }: Props) => {
-	const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
 	const [listWidth, setListWidth] = useState<number>(0);
 
 	const reference = useRef<HTMLButtonElement>(null);
@@ -23,13 +22,13 @@ const NavDropdown = ({ content, dir }: Props) => {
 	const turnoffDropsExceptOne = useStore(state => state.turnoffDropsExceptOne);
 
 	const toggleOptionState = () => {
-		setIsOptionsOpen(s => !s);
+		turnoffDropsExceptOne(content, !dropdownMenuStates[content]);
 	};
 
 	const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLUListElement | HTMLButtonElement>) => {
 		if (e.key === "Escape") {
 			e.preventDefault();
-			setIsOptionsOpen(false);
+			turnoffDropsExceptOne(content, false);
 		}
 	};
 
@@ -38,14 +37,14 @@ const NavDropdown = ({ content, dir }: Props) => {
 			<button
 				type="button"
 				aria-haspopup="listbox"
-				aria-expanded={isOptionsOpen}
+				aria-expanded={dropdownMenuStates[content]}
 				ref={reference}
 				onClick={toggleOptionState}
 				onKeyDown={(e) => {
 					handleBtnKeyDown(e);
 				}}
-				className={`relative inline-flex justify-center font-serif p-2 mx-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-none focus:border-2 focus:border-white ${
-					isOptionsOpen ? "border-2 border-white bg-teal-600" : ""
+				className={`relative inline-flex justify-center font-serif p-2 mx-[10px] focus:mx-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-none focus:border-2 focus:border-white ${
+					dropdownMenuStates[content] ? "border-2 border-white bg-teal-600" : ""
 				}`}
 			>
 				{content}&nbsp;
@@ -53,7 +52,7 @@ const NavDropdown = ({ content, dir }: Props) => {
 			</button>
 			<ul
 				className={`absolute mx-2 text-white bg-teal-600 rounded-b outline-none ${
-					isOptionsOpen ? "block" : "hidden"
+					dropdownMenuStates[content] ? "block" : "hidden"
 				}`}
 				style={{ minWidth: `${listWidth}px`, width: "fit-content" }}
 				role="listbox"

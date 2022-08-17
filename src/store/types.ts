@@ -22,7 +22,7 @@ interface Global {
 	dropdownMenuStates: { [name: string]: boolean };
 	initDropdownStates: (value: { [name: string]: boolean }) => void;
 	turnoffDrops: () => void;
-	turnoffDropsExceptOne: (val: string) => void;
+	turnoffDropsExceptOne: (val: string, bool: boolean) => void;
 }
 
 type ZustandSetFnType = (

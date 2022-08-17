@@ -84,13 +84,13 @@ const createDropdownMenuStates = (set: ZustandSetFnType) => ({
 				Object.keys(state.dropdownMenuStates).map(key => [key, false])
 			),
 		})),
-	turnoffDropsExceptOne: (val: string) =>
+	turnoffDropsExceptOne: (val: string, bool: boolean) =>
 		set((state: Global) => ({
 			...state,
 			dropdownMenuStates: Object.fromEntries(
 				Object.keys(state.dropdownMenuStates).map(key =>
 					key === val
-						? [key, state.dropdownMenuStates[key]]
+						? [key, bool]
 						: [key, false]
 				)
 			),
