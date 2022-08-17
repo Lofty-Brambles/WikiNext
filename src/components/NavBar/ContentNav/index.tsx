@@ -52,7 +52,7 @@ const ContentNav = () => {
 						<button
 							type="button"
 							aria-label="Scroll Left"
-							className="h-fit p-2 mx-[2px] focus:mx-0 rounded-full hover:bg-teal-600 focus:outline-none focus:border-2 focus:border-white"
+							className="h-fit p-2 rounded-full hover:bg-teal-600 outline-[1px] outline-white"
 							onMouseDown={() => {
 								leftTimer.current = scroll("l");
 								turnOffDrops();
@@ -74,7 +74,7 @@ const ContentNav = () => {
 						<button
 							type="button"
 							aria-label="Scroll Right"
-							className="h-fit p-2 mx-[2px] focus:mx-0 rounded-full hover:bg-teal-600 focus:outline-none focus:border-2 focus:border-white"
+							className="h-fit p-2 rounded-full hover:bg-teal-600 outline-[1px] outline-white"
 							onMouseDown={() => {
 								rightTimer.current = scroll("r");
 								turnOffDrops();

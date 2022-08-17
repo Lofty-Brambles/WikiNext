@@ -43,8 +43,8 @@ const NavDropdown = ({ content, dir }: Props) => {
 				onKeyDown={(e) => {
 					handleBtnKeyDown(e);
 				}}
-				className={`relative inline-flex justify-center font-serif p-2 mx-[10px] focus:mx-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-none focus:border-2 focus:border-white ${
-					dropdownMenuStates[content] ? "border-2 border-white bg-teal-600" : ""
+				className={`relative inline-flex justify-center font-serif p-2 mx-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-2 outline-white ${
+					dropdownMenuStates[content] ? "bg-teal-600" : ""
 				}`}
 			>
 				{content}&nbsp;
