@@ -21,13 +21,11 @@ const createCustomFormState = (set: ZustandSetFnType) => ({
 	customFormDtls: {
 		sans: false,
 		darkMode: false,
-		textSize: "md",
 		sideSpace: "md",
 		justify: false,
 	} as {
 		sans: boolean;
 		darkMode: boolean;
-		textSize: "sm" | "md" | "lg";
 		sideSpace: "sm" | "md" | "lg";
 		justify: boolean;
 	},
@@ -45,14 +43,6 @@ const createCustomFormState = (set: ZustandSetFnType) => ({
 			customFormDtls: {
 				...state.customFormDtls,
 				darkMode: !state.customFormDtls.darkMode,
-			},
-		})),
-	toggleTextSize: (val: "sm" | "md" | "lg") =>
-		set((state: Global) => ({
-			...state,
-			customFormDtls: {
-				...state.customFormDtls,
-				textSize: val,
 			},
 		})),
 	toggleSideSpace: (val: "sm" | "md" | "lg") =>

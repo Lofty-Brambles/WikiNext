@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { ref } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { ChevronLeft, ChevronRight } from "react-feather";
-import { fs } from "../../../firebase/firebase-init";
-import { fsSnap } from "../../../types";
+import { fs } from "../../firebase/firebase-init";
+import { fsSnap } from "../../types";
 import NavDropdown from "../NavDropdown";
-import useStore from "../../../store";
+import useStore from "../../store";
 
 const ContentNav = () => {
 	const [snap, load, err] = useObjectVal<fsSnap>(ref(fs));

@@ -9,13 +9,11 @@ interface Global {
 	customFormDtls: {
 		sans: boolean;
 		darkMode: boolean;
-		textSize: "sm" | "md" | "lg";
 		sideSpace: "sm" | "md" | "lg";
 		justify: boolean;
 	};
 	toggleFont: () => void;
 	toggleDarkMode: () => void;
-	toggleTextSize: (input: "sm" | "md" | "lg") => void;
 	toggleSideSpace: (input: "sm" | "md" | "lg") => void;
 	toggleJustify: () => void;
 

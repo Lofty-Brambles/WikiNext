@@ -1,7 +1,7 @@
 import Hamburger from "hamburger-react";
 import React from "react";
 import { Link } from "react-router-dom";
-import useStore from "../../../store";
+import useStore from "../../store";
 
 const HeroHead = () => {
 	const sideBarState: boolean = useStore(state => state.sidebarState);

@@ -77,12 +77,6 @@ const CustomMenu = () => {
 	const toggleDarkMode = useStore(state => state.toggleDarkMode);
 	const toggleJustify = useStore(state => state.toggleJustify);
 
-	const textSize = useStore(
-		state => state.customFormDtls.textSize
-	);
-	const toggleTextSize = useStore(
-		state => state.toggleTextSize
-	);
 	const sideSpace = useStore(
 		state => state.customFormDtls.sideSpace
 	);
@@ -92,12 +86,6 @@ const CustomMenu = () => {
 
 	return (
 		<ul className="flex flex-col px-4 py-2 mb-2 gap-2 rounded-b-lg border-2 border-gray-700">
-			<ThreeBtn
-				prop={textSize}
-				toggleFunction={toggleTextSize}
-				IconP={Type}
-				name="Text Size"
-			/>
 			<ThreeBtn
 				prop={sideSpace}
 				toggleFunction={toggleSideSpace}

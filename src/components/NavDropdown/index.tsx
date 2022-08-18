@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown, ExternalLink } from "react-feather";
 import { Link } from "react-router-dom";
-import useStore from "../../../store";
-import { fsSnap } from "../../../types";
+import useStore from "../../store";
+import { fsSnap } from "../../types";
 
 type Props = {
 	content: string;
@@ -19,13 +19,18 @@ const NavDropdown = ({ content, dir }: Props) => {
 	});
 
 	const dropdownMenuStates = useStore(state => state.dropdownMenuStates);
-	const turnoffDropsExceptOne = useStore(state => state.turnoffDropsExceptOne);
+	const turnoffDropsExceptOne = useStore(
+		state => state.turnoffDropsExceptOne
+	);
+	const turnOffDrops = useStore(state => state.turnoffDrops);
 
 	const toggleOptionState = () => {
 		turnoffDropsExceptOne(content, !dropdownMenuStates[content]);
 	};
 
-	const handleBtnKeyDown = (e: React.KeyboardEvent<HTMLUListElement | HTMLButtonElement>) => {
+	const handleBtnKeyDown = (
+		e: React.KeyboardEvent<HTMLUListElement | HTMLButtonElement>
+	) => {
 		if (e.key === "Escape") {
 			e.preventDefault();
 			turnoffDropsExceptOne(content, false);
@@ -40,7 +45,7 @@ const NavDropdown = ({ content, dir }: Props) => {
 				aria-expanded={dropdownMenuStates[content]}
 				ref={reference}
 				onClick={toggleOptionState}
-				onKeyDown={(e) => {
+				onKeyDown={e => {
 					handleBtnKeyDown(e);
 				}}
 				className={`relative inline-flex justify-center font-serif p-2 mx-2 rounded-t-lg focus:bg-teal-600 whitespace-nowrap outline-2 outline-white ${
@@ -51,7 +56,7 @@ const NavDropdown = ({ content, dir }: Props) => {
 				<ChevronDown />
 			</button>
 			<ul
-				className={`absolute mx-2 text-white bg-teal-600 rounded-b outline-none ${
+				className={`absolute mx-2 text-white bg-teal-600 outline-none ${
 					dropdownMenuStates[content] ? "block" : "hidden"
 				}`}
 				style={{ minWidth: `${listWidth}px`, width: "fit-content" }}
@@ -60,14 +65,15 @@ const NavDropdown = ({ content, dir }: Props) => {
 				onKeyDown={handleBtnKeyDown}
 			>
 				{Object.keys(dir[content]).map(page => (
-					<li key={page} id={page}>
+					<li key={page} id={page} className="p-1">
 						<Link
-							to={`/${encodeURIComponent(page)}`}
+							to={`/wiki/${encodeURIComponent(page)}`}
 							tabIndex={0}
-							className="flex justify-center align-middle p-1 last:rounded outline-none focus:text-black hover:bg-teal-800"
+							onClick={turnOffDrops}
+							className="flex justify-center items-center p-1 outline-none focus:text-black hover:bg-teal-800"
 						>
-							{page}&nbsp;
-							<ExternalLink />
+							{page}&nbsp;&nbsp;
+							<ExternalLink size={16} />
 						</Link>
 					</li>
 				))}

@@ -1,0 +1,538 @@
+/*
+	padding - external (*)
+	justify text - excess prop (*)
+	sans-serif - font-family (D)
+	darkmode - color (D)
+*/
+
+:root {
+	--default: #24292f;
+	--muted: #57606a;
+	--neutral-muted: rgba(175, 184, 193, 0.2);
+	--danger: #b35900;
+	--accent-emp: #0969da;
+	--border-default: #d0d7de;
+	--border-muted: hsla(210, 18%, 87%, 1);
+	--canvas-default: #ffffff;
+	--canvas-subtle: #f6f8fa;
+
+	--font: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+}
+
+.sans {
+	--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+.dark {
+	--default: #c9d1d9;
+	--muted: #8b949e;
+	--neutral-muted: rgba(110, 118, 129, 0.4);
+	--danger: #d47616;
+	--accent-emp: #1f6feb;
+	--border-default: #30363d;
+	--border-muted: #21262d;
+	--canvas-default: #0d1117;
+	--canvas-subtle: #161b22;
+}
+
+.markdown-body {
+
+	font-family: var(--font);
+	font-size: 1rem;
+	line-height: 1.5;
+	word-wrap: break-word;
+
+	&::before {
+		display: table;
+		content: '';
+	}
+
+	&::after {
+		display: table;
+		clear: both;
+		content: '';
+	}
+
+	>*:first-child {
+		margin-top: 0 !important;
+	}
+
+	>*:last-child {
+		margin-bottom: 0 !important;
+	}
+
+	.octicon-link {
+		display: inline-block;
+		fill: currentColor;
+		vertical-align: text-bottom;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-top: 1.5rem;
+		margin-bottom: 1rem;
+		font-weight: 600;
+		line-height: 1.25;
+
+		.octicon-link {
+			color: var(--default);
+			vertical-align: middle;
+			visibility: hidden;
+		}
+
+		&:hover .anchor {
+			text-decoration: none;
+
+			.octicon-link {
+				visibility: visible;
+
+				&::before {
+					width: 16px;
+					height: 16px;
+					content: ' ';
+					display: inline-block;
+					background-color: currentColor;
+					-webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+					mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+				}
+			}
+		}
+
+		tt,
+		code {
+			padding: 0 0.2em;
+			font-size: inherit;
+		}
+	}
+
+	h1 {
+		padding-bottom: 0.3em;
+		font-size: 2em;
+		border-bottom: 1px solid var(--border-muted);
+	}
+
+	h2 {
+		padding-bottom: 0.3em;
+		font-size: 1.5em;
+		border-bottom: 1px solid var(--border-muted);
+	}
+
+	h3 {
+		font-size: 1.25em;
+	}
+
+	h4 {
+		font-size: 1em;
+	}
+
+	h5 {
+		font-size: 0.875em;
+	}
+
+	h6 {
+		font-size: 0.85em;
+		color: var(--muted);
+	}
+
+	summary {
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			display: inline-block;
+
+			.anchor {
+				margin-left: -40px;
+			}
+		}
+
+		h1,
+		h2 {
+			padding-bottom: 0;
+			border-bottom: 0;
+		}
+	}
+
+	// Anchors like <a name="examples">. These sometimes end up wrapped around
+	// text when users mistakenly forget to close the tag or use self-closing tag
+	// syntax. We don't want them to appear like links.
+	// FIXME: a:not(:link):not(:visited) would be a little clearer here (and
+	// possibly faster to match), but it breaks styling of <a href> elements due
+	// to https://bugs.webkit.org/show_bug.cgi?id=142737.
+	a:not([href]) {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	// Link Colors
+	.absent {
+		color: var(--danger);
+	}
+
+	.anchor {
+		float: left;
+		padding-right: 0.5rem;
+		margin-left: -20px;
+		line-height: 1;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	p,
+	blockquote,
+	ul,
+	ol,
+	dl,
+	table,
+	pre,
+	details {
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+	hr {
+		height: 0.25em;
+		padding: 0;
+		margin: 0.375em 0;
+		background-color: var(--border-default);
+		border: 0;
+	}
+
+	blockquote {
+		padding: 0 1em;
+		color: var(--muted);
+		border-left: 0.25em solid var(--color-border-default);
+
+		> :first-child {
+			margin-top: 0;
+		}
+
+		> :last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	ul,
+	ol {
+		list-style-type: disc;
+		padding-left: 2em;
+
+		&.no-list {
+			padding: 0;
+			list-style-type: none;
+		}
+	}
+
+	ol[type='1'] {
+		list-style-type: decimal;
+	}
+
+	ol[type='a'] {
+		list-style-type: lower-alpha;
+	}
+
+	ol[type='i'] {
+		list-style-type: lower-roman;
+	}
+
+	// Reset <ol> style to decimal (HTML default) specifically for AsciiDoc
+	// <div><ol> construction (doesn't affect MarkDown)
+	div>ol:not([type]) {
+		list-style-type: decimal;
+	}
+
+	ul ul,
+	ul ol,
+	ol ol,
+	ol ul {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	li>p {
+		margin-top: 1rem;
+	}
+
+	li+li {
+		margin-top: 0.25em;
+	}
+
+	dl {
+		padding: 0;
+
+		dt {
+			padding: 0;
+			margin-top: 1rem;
+			font-size: 1em;
+			font-style: italic;
+			font-weight: 600;
+		}
+
+		dd {
+			padding: 0 1rem;
+			margin-bottom: 1rem;
+		}
+	}
+
+	table {
+		display: block;
+		width: max-content;
+		max-width: 100%;
+		overflow: auto;
+
+		th {
+			font-weight: 600;
+		}
+
+		th,
+		td {
+			padding: 6px 13px;
+			border: 1px solid var(--border-default);
+		}
+
+		tr {
+			background-color: var(--canvas-default);
+			border-top: 1px solid var(--border-default);
+
+			&:nth-child(2n) {
+				background-color: var(--canvas-subtle);
+			}
+		}
+
+		img {
+			background-color: transparent;
+		}
+	}
+
+	img {
+		max-width: 100%;
+		box-sizing: content-box;
+		background-color: var(--canvas-default);
+
+		&[align='right'] {
+			padding-left: 20px;
+		}
+
+		&[align='left'] {
+			padding-right: 20px;
+		}
+	}
+
+	.emoji {
+		max-width: none;
+		vertical-align: text-top;
+		background-color: transparent;
+	}
+
+	span.frame {
+		display: block;
+		overflow: hidden;
+
+		>span {
+			display: block;
+			float: left;
+			width: auto;
+			padding: 7px;
+			margin: 13px 0 0;
+			overflow: hidden;
+			border: 1px solid var(--border-default);
+		}
+
+		span img {
+			display: block;
+			float: left;
+		}
+
+		span span {
+			display: block;
+			padding: 5px 0 0;
+			clear: both;
+			color: var(--default);
+		}
+	}
+
+	span.align-center {
+		display: block;
+		overflow: hidden;
+		clear: both;
+
+		>span {
+			display: block;
+			margin: 13px auto 0;
+			overflow: hidden;
+			text-align: center;
+		}
+
+		span img {
+			margin: 0 auto;
+			text-align: center;
+		}
+	}
+
+	span.align-right {
+		display: block;
+		overflow: hidden;
+		clear: both;
+
+		>span {
+			display: block;
+			margin: 13px 0 0;
+			overflow: hidden;
+			text-align: right;
+		}
+
+		span img {
+			margin: 0;
+			text-align: right;
+		}
+	}
+
+	span.float-left {
+		display: block;
+		float: left;
+		margin-right: 13px;
+		overflow: hidden;
+
+		span {
+			margin: 13px 0 0;
+		}
+	}
+
+	span.float-right {
+		display: block;
+		float: right;
+		margin-left: 13px;
+		overflow: hidden;
+
+		>span {
+			display: block;
+			margin: 13px auto 0;
+			overflow: hidden;
+			text-align: right;
+		}
+	}
+
+	code,
+	tt {
+		padding: 0.2em 0.4em;
+		margin: 0;
+		font-size: 85%;
+		background-color: var(--neutral-muted);
+		border-radius: 6px;
+
+		br {
+			display: none;
+		}
+	}
+
+	del code {
+		text-decoration: inherit;
+	}
+
+	samp {
+		font-size: 85%;
+	}
+
+	pre {
+		word-wrap: normal;
+
+		code {
+			font-size: 100%;
+		}
+
+		// Code tags within code blocks (<pre>s)
+		>code {
+			padding: 0;
+			margin: 0;
+			word-break: normal;
+			white-space: pre;
+			background: transparent;
+			border: 0;
+		}
+	}
+
+	.highlight {
+		margin-bottom: 1rem;
+
+		pre {
+			margin-bottom: 0;
+			word-break: normal;
+		}
+	}
+
+	.highlight pre,
+	pre {
+		padding: 1rem;
+		overflow: auto;
+		font-size: 85%;
+		line-height: 1.45;
+		background-color: var(--canvas-subtle);
+		border-radius: 6px;
+	}
+
+	pre code,
+	pre tt {
+		display: inline;
+		max-width: auto;
+		padding: 0;
+		margin: 0;
+		overflow: visible;
+		line-height: inherit;
+		word-wrap: normal;
+		background-color: transparent;
+		border: 0;
+	}
+
+	[data-footnote-ref] {
+		&::before {
+			content: '[';
+		}
+
+		&::after {
+			content: ']';
+		}
+	}
+
+	.footnotes {
+		font-size: 1rem;
+		color: var(--muted);
+		border-top: 1px solid var(--border-default);
+
+		ol {
+			padding-left: 1rem;
+		}
+
+		li {
+			position: relative;
+		}
+
+		li:target::before {
+			position: absolute;
+			top: -0.5rem;
+			right: -0.5rem;
+			bottom: -0.5rem;
+			left: -1.5rem;
+			pointer-events: none;
+			content: '';
+			border: 2px solid var(--accent-emp);
+			border-radius: 6px;
+		}
+
+		li:target {
+			color: var(--default);
+		}
+
+		.data-footnote-backref g-emoji {
+			font-family: monospace;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import HeroHead from "../../components/NavBar/HeroHead";
+import HeroHead from "../../components/HeroHead";
 import Sidebar from "../../components/SideBar";
 
 const App = () => (
