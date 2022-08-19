@@ -7,9 +7,10 @@ import { fsSnap } from "../../types";
 type Props = {
 	content: string;
 	dir: fsSnap;
+	parentWidth: number | undefined;
 };
 
-const NavDropdown = ({ content, dir }: Props) => {
+const NavDropdown = ({ content, dir, parentWidth }: Props) => {
 	const [listWidth, setListWidth] = useState<number>(0);
 	const [align, setAlign] = useState<number>(0);
 
@@ -19,7 +20,7 @@ const NavDropdown = ({ content, dir }: Props) => {
 	useEffect(() => {
 		if (reference.current?.offsetWidth !== undefined)
 			setListWidth(reference.current?.offsetWidth);
-		setAlign(reference.current?.getBoundingClientRect().left);
+		setAlign(reference.current?.getBoundingClientRect().left!);
 	});
 
 	const dropdownMenuStates = useStore(state => state.dropdownMenuStates);
@@ -71,7 +72,14 @@ const NavDropdown = ({ content, dir }: Props) => {
 				className={`absolute text-white bg-teal-600 outline-none ${
 					dropdownMenuStates[content] ? "block" : "hidden"
 				}`}
-				style={{ minWidth: `${listWidth}px`, width: "fit-content", left: `${align}px` }}
+				style={{
+					minWidth: `${listWidth}px`,
+					width: "fit-content",
+					left:
+						parentWidth! + 58 > Math.max(align, 58) + listWidth
+							? `${Math.max(align, 58)}px`
+							: `${parentWidth! + 58 - listWidth}px`,
+				}}
 				role="listbox"
 				tabIndex={-1}
 				onKeyDown={handleBtnKeyDown}

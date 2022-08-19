@@ -33,6 +33,8 @@ const ContentNav = () => {
 		}, 100);
 	};
 
+	const width = () => reference.current?.getBoundingClientRect().width;
+
 	return (
 		<div className="box-border w-full min-h-[4rem] flex items-center gap-2 pl-2 pr-2 lg:pr-[calc(1rem+2px)] border-l-2 bg-teal-800 text-white shadow-md border-b-2">
 			{err && (
@@ -68,13 +70,18 @@ const ContentNav = () => {
 							ref={reference}
 						>
 							{Object.keys(snap).map(ele => (
-								<NavDropdown key={ele} content={ele} dir={snap} />
+								<NavDropdown
+									key={ele}
+									content={ele}
+									dir={snap}
+									parentWidth={width()}
+								/>
 							))}
 						</div>
 						<button
 							type="button"
 							aria-label="Scroll Right"
-							className="h-fit p-2 rounded-full hover:bg-teal-600 outline-[1px] outline-white"
+							className="h-fit p-2 mr-1 rounded-full hover:bg-teal-600 outline-[1px] outline-white"
 							onMouseDown={() => {
 								rightTimer.current = scroll("r");
 								turnOffDrops();
