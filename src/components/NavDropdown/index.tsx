@@ -7,10 +7,9 @@ import { fsSnap } from "../../types";
 type Props = {
 	content: string;
 	dir: fsSnap;
-	parentWidth: number | undefined;
 };
 
-const NavDropdown = ({ content, dir, parentWidth }: Props) => {
+const NavDropdown = ({ content, dir }: Props) => {
 	const [listWidth, setListWidth] = useState<number>(0);
 	const [align, setAlign] = useState<number>(0);
 
@@ -23,6 +22,7 @@ const NavDropdown = ({ content, dir, parentWidth }: Props) => {
 		setAlign(reference.current?.getBoundingClientRect().left!);
 	});
 
+	const parentWidth = useStore(state => state.navBarLength);
 	const dropdownMenuStates = useStore(state => state.dropdownMenuStates);
 	const turnoffDropsExceptOne = useStore(
 		state => state.turnoffDropsExceptOne
@@ -76,9 +76,9 @@ const NavDropdown = ({ content, dir, parentWidth }: Props) => {
 					minWidth: `${listWidth}px`,
 					width: "fit-content",
 					left:
-						parentWidth! + 58 > Math.max(align, 58) + listWidth
+						parentWidth + 58 > Math.max(align, 58) + listWidth
 							? `${Math.max(align, 58)}px`
-							: `${parentWidth! + 58 - listWidth}px`,
+							: `${parentWidth + 58 - listWidth}px`,
 				}}
 				role="listbox"
 				tabIndex={-1}

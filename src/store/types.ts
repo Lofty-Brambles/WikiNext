@@ -21,6 +21,12 @@ interface Global {
 	initDropdownStates: (value: { [name: string]: boolean }) => void;
 	turnoffDrops: () => void;
 	turnoffDropsExceptOne: (val: string, bool: boolean) => void;
+
+	flatFileStore: { [name: string]: string[] };
+	initFlatFileStore: (val: { [name: string]: string[] }) => void;
+
+	navBarLength: number;
+	setNavBarLength: (val: number) => void;
 }
 
 type ZustandSetFnType = (

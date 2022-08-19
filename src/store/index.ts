@@ -85,11 +85,25 @@ const createDropdownMenuStates = (set: ZustandSetFnType) => ({
 		})),
 });
 
+const createFlatFileStore = (set: ZustandSetFnType) => ({
+	flatFileStore: {} as { [name: string]: string[] },
+	initFlatFileStore: (val: { [name: string]: string[] }) =>
+		set((state: Global) => ({ ...state, flatFileStore: val })),
+});
+
+const createNavStore = (set: ZustandSetFnType) => ({
+	navBarLength: 0,
+	setNavBarLength: (val: number) =>
+		set((state: Global) => ({ ...state, navBarLength: val })),
+});
+
 const useStore = create<Global>()(set => ({
 	...createSideBarState(set),
 	...createCustomizationsState(set),
 	...createCustomFormState(set),
 	...createDropdownMenuStates(set),
+	...createFlatFileStore(set),
+	...createNavStore(set),
 }));
 
 export default useStore;

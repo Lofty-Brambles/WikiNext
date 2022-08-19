@@ -23,6 +23,20 @@ const ContentNav = () => {
 			);
 	}, [snap]);
 
+	const setNavBarLength = useStore(store => store.setNavBarLength);
+	const resizeHandler = () => {
+		setNavBarLength(reference.current?.getBoundingClientRect().width!);
+	};
+	useEffect(() => {
+		setNavBarLength(reference.current?.getBoundingClientRect().width!);
+	}, [reference.current]);
+	useEffect(() => {
+		window.addEventListener("resize", resizeHandler);
+		return () => {
+			window.removeEventListener("resize", resizeHandler);
+		};
+	}, []);
+
 	const scroll = (val: "l" | "r") => {
 		if (val === "l" && reference !== null)
 			return setInterval(() => {
@@ -32,8 +46,6 @@ const ContentNav = () => {
 			reference.current!.scrollLeft += 100;
 		}, 100);
 	};
-
-	const width = () => reference.current?.getBoundingClientRect().width;
 
 	return (
 		<div className="box-border w-full min-h-[4rem] flex items-center gap-2 pl-2 pr-2 lg:pr-[calc(1rem+2px)] border-l-2 bg-teal-800 text-white shadow-md border-b-2">
@@ -74,7 +86,6 @@ const ContentNav = () => {
 									key={ele}
 									content={ele}
 									dir={snap}
-									parentWidth={width()}
 								/>
 							))}
 						</div>

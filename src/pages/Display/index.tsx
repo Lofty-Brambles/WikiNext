@@ -29,7 +29,7 @@ const Display = () => {
 		<div className="box-border w-full h-[calc(100%-84px)] lg:w-[80vw] flex justify-start items-center flex-col text-center">
 			<ContentNav />
 			<div
-				className={`grow w-full py-10 lg:mr-6 overflow-y-scroll ${
+				className={`grow w-full py-10 lg:mr-4 overflow-y-scroll ${
 					// eslint-disable-next-line no-nested-ternary
 					customStyles.sideSpace === "sm"
 						? "px-10"
@@ -56,7 +56,7 @@ const Display = () => {
 						<div className="flex justify-between items-center gap-2 mb-4">
 							<div className="flex gap-2 whitespace-nowrap flex-wrap">
 								{value?.tags.map(txt => (
-									<Tag info={txt} />
+									<Tag key={txt} info={txt} />
 								))}
 							</div>
 							<div
