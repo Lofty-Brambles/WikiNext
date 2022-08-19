@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useDocumentDataOnce } from "react-firebase-hooks/firestore";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, DocumentReference } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import remarkToc from "remark-toc";
@@ -19,7 +19,7 @@ import Tag from "../../components/Tags";
 const Display = () => {
 	const { name } = useParams();
 	const reference = doc(db, "pages", decodeURIComponent(name!));
-	const [value, load, err] = useDocumentDataOnce<PageSnap>(
+	const [value, load, err] = useDocumentData<PageSnap>(
 		reference as DocumentReference<PageSnap>
 	);
 

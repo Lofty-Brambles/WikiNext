@@ -11,12 +11,15 @@ type Props = {
 
 const NavDropdown = ({ content, dir }: Props) => {
 	const [listWidth, setListWidth] = useState<number>(0);
+	const [align, setAlign] = useState<number>(0);
 
 	const reference = useRef<HTMLButtonElement>(null);
+	const list = useRef<HTMLUListElement>(null);
 	const link = useRef<HTMLAnchorElement>(null);
 	useEffect(() => {
 		if (reference.current?.offsetWidth !== undefined)
 			setListWidth(reference.current?.offsetWidth);
+		setAlign(reference.current?.getBoundingClientRect().left);
 	});
 
 	const dropdownMenuStates = useStore(state => state.dropdownMenuStates);
@@ -64,10 +67,11 @@ const NavDropdown = ({ content, dir }: Props) => {
 				<ChevronDown />
 			</button>
 			<ul
-				className={`absolute mx-2 text-white bg-teal-600 outline-none ${
+				ref={list}
+				className={`absolute text-white bg-teal-600 outline-none ${
 					dropdownMenuStates[content] ? "block" : "hidden"
 				}`}
-				style={{ minWidth: `${listWidth}px`, width: "fit-content" }}
+				style={{ minWidth: `${listWidth}px`, width: "fit-content", left: `${align}px` }}
 				role="listbox"
 				tabIndex={-1}
 				onKeyDown={handleBtnKeyDown}
