@@ -51,7 +51,7 @@ const Display = () => {
 						🔄 | Loading all content.
 					</code>
 				)}
-				{!load && (
+				{!load && !err && (
 					<>
 						<div className="flex justify-between items-center gap-2 mb-4">
 							<div className="flex gap-2 whitespace-nowrap flex-wrap">
@@ -64,10 +64,18 @@ const Display = () => {
 									customStyles.darkMode ? "text-white" : ""
 								}`}
 							>
-								<button type="button" className="p-1" name="edit">
+								<button
+									type="button"
+									className="p-1"
+									name="edit"
+								>
 									<Edit />
 								</button>
-								<button type="button" className="p-1" name="share">
+								<button
+									type="button"
+									className="p-1"
+									name="share"
+								>
 									<Share
 										onClick={async () => {
 											try {

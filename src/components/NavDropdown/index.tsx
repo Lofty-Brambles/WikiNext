@@ -13,6 +13,7 @@ const NavDropdown = ({ content, dir }: Props) => {
 	const [listWidth, setListWidth] = useState<number>(0);
 
 	const reference = useRef<HTMLButtonElement>(null);
+	const link = useRef<HTMLAnchorElement>(null);
 	useEffect(() => {
 		if (reference.current?.offsetWidth !== undefined)
 			setListWidth(reference.current?.offsetWidth);
@@ -34,6 +35,13 @@ const NavDropdown = ({ content, dir }: Props) => {
 		if (e.key === "Escape") {
 			e.preventDefault();
 			turnoffDropsExceptOne(content, false);
+		}
+	};
+
+	const handleListKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+		if (e.key === " " || e.key === "Spacebar") {
+			e.preventDefault();
+			link.current?.click();
 		}
 	};
 
@@ -68,8 +76,10 @@ const NavDropdown = ({ content, dir }: Props) => {
 					<li key={page} id={page} className="p-1">
 						<Link
 							to={`/wiki/${encodeURIComponent(page)}`}
+							ref={link}
 							tabIndex={0}
 							onClick={turnOffDrops}
+							onKeyDown={handleListKeyDown}
 							className="flex justify-center items-center p-1 outline-none focus:text-black hover:bg-teal-800"
 						>
 							{page}&nbsp;&nbsp;

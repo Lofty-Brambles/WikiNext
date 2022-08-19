@@ -79,9 +79,7 @@ const createDropdownMenuStates = (set: ZustandSetFnType) => ({
 			...state,
 			dropdownMenuStates: Object.fromEntries(
 				Object.keys(state.dropdownMenuStates).map(key =>
-					key === val
-						? [key, bool]
-						: [key, false]
+					key === val ? [key, bool] : [key, false]
 				)
 			),
 		})),
