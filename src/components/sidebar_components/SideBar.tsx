@@ -9,7 +9,7 @@ import {
 } from "react-feather";
 import { Link } from "react-router-dom";
 import useStore from "../../store";
-import CustomMenu from "../CustomiseDrop";
+import CustomMenu from "./CustomiseDrop";
 
 const Sidebar = () => {
 	const sideBarState: boolean = useStore(state => state.sidebarState);

@@ -3,8 +3,8 @@ import { ref } from "firebase/database";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import { fs } from "../../firebase/firebase-init";
-import { fsSnap } from "../../types";
-import NavDropdown from "../NavDropdown";
+import { fsFlat, fsSnap } from "../../types";
+import NavDropdown from "./NavDropdown";
 import useStore from "../../store";
 
 const ContentNav = () => {
@@ -15,12 +15,24 @@ const ContentNav = () => {
 
 	const initDropdownStates = useStore(state => state.initDropdownStates);
 	const turnOffDrops = useStore(state => state.turnoffDrops);
+	const initfsNav = useStore(state => state.initFlatFileStore);
 
 	useEffect(() => {
-		if (snap !== undefined)
+		if (snap !== undefined) {
 			initDropdownStates(
 				Object.fromEntries(Object.keys(snap).map(key => [key, false]))
 			);
+			const values = Object.values(snap) as unknown as fsFlat[];
+			const flatFiles = values.reduce((p, n) => ({ ...p, ...n }), {});
+			initfsNav(
+				Object.fromEntries(
+					Object.keys(flatFiles).map(key => [
+						key,
+						flatFiles[key].tags,
+					])
+				)
+			);
+		}
 	}, [snap]);
 
 	const setNavBarLength = useStore(store => store.setNavBarLength);

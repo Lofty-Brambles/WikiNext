@@ -7,7 +7,6 @@ const createSideBarState = (set: ZustandSetFnType) => ({
 		set((state: Global) => ({ ...state, sidebarState: value })),
 });
 
-// eslint-disable-next-line no-unused-vars
 const createCustomizationsState = (set: ZustandSetFnType) => ({
 	customiserDropdown: false,
 	toggleCustomiserDrop: () =>

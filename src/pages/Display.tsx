@@ -9,13 +9,12 @@ import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import { Edit, Share } from "react-feather";
-import { PageSnap } from "../../types";
-import { db } from "../../firebase/firebase-init";
-import ContentNav from "../../components/ContentNav";
-import useStore from "../../store";
-import Tag from "../../components/Tags";
+import { PageSnap } from "../types";
+import { db } from "../firebase/firebase-init";
+import ContentNav from "../components/content_components/ContentNav";
+import useStore from "../store";
+import Tag from "../components/content_components/Tags";
 
-// eslint-disable-next-line arrow-body-style
 const Display = () => {
 	const { name } = useParams();
 	const reference = doc(db, "pages", decodeURIComponent(name!));

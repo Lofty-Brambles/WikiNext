@@ -6,6 +6,12 @@ export type fsSnap = {
 	};
 };
 
+export type fsFlat = {
+	[file: string]: {
+		tags: string[];
+	};
+};
+
 export type PageSnap = {
 	content: string;
 	tags: string[];
