@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 interface Global {
-	sidebarState: boolean;
-	toggleSidebarState: (value: boolean) => void;
+	// The sidebar options and dropdowns
+	burger: boolean;
+	setBurger: (v: boolean) => void;
+	sideDropdown: boolean;
+	toggleSideDropdown: () => void;
 
-	customiserDropdown: boolean;
-	toggleCustomiserDrop: () => void;
-
-	customFormDtls: {
+	// The markdown looks and settings
+	looks: {
 		sans: boolean;
 		darkMode: boolean;
 		sideSpace: "sm" | "md" | "lg";
@@ -14,19 +15,21 @@ interface Global {
 	};
 	toggleFont: () => void;
 	toggleDarkMode: () => void;
-	toggleSideSpace: (input: "sm" | "md" | "lg") => void;
+	toggleSideSpace: (v: "sm" | "md" | "lg") => void;
 	toggleJustify: () => void;
 
-	dropdownMenuStates: { [name: string]: boolean };
-	initDropdownStates: (value: { [name: string]: boolean }) => void;
-	turnoffDrops: () => void;
-	turnoffDropsExceptOne: (val: string, bool: boolean) => void;
+	// Nav-bar length, and it's management for dropdown sticking
+	navbarLength: number;
+	setNavbarLength: (v: number) => void;
 
-	flatFileStore: { [name: string]: string[] };
-	initFlatFileStore: (val: { [name: string]: string[] }) => void;
+	// The file-structure and dropdowns-states in the state
+	fileStore: { [name: string]: string[] };
+	navDrops: { [name: string]: boolean };
+	setFileStore: (v: { [name: string]: string[] }) => void;
+	setNavDrops: (v: { [name: string]: boolean }) => void;
 
-	navBarLength: number;
-	setNavBarLength: (val: number) => void;
+	turnOffDrops: () => void;
+	turnOffDropsxOne: (v: string) => void;
 }
 
 type ZustandSetFnType = (

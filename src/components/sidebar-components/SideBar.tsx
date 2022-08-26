@@ -8,23 +8,28 @@ import {
 	User,
 } from "react-feather";
 import { Link } from "react-router-dom";
-import useStore from "../../store";
+import store from "../../store";
 import CustomMenu from "./CustomiseDrop";
 
 const Sidebar = () => {
-	const sideBarState: boolean = useStore(state => state.sidebarState);
-
-	const toggleState: boolean = useStore(state => state.customiserDropdown);
-	const toggler: () => void = useStore(state => state.toggleCustomiserDrop);
+	const [burger, drop, toggledrop] = store(state => [
+		state.burger,
+		state.sideDropdown,
+		state.toggleSideDropdown,
+	]);
 
 	return (
 		<section
 			className={`fixed box-border h-[calc(100%-84px)] lg:w-[21vw] z-10 right-0 lg:flex flex-col motion-safe:animate-open overflow-auto mt-[84px] p-4 border-l-2 shadow bg-gradient-to-l from-gray-200 to-gray-400 font-serif 2xl:text-lg ${
-				sideBarState ? "flex w-[300px] flex-col" : "hidden"
+				burger ? "flex w-[300px] flex-col" : "hidden"
 			}`}
 		>
 			{[
-				{ path: "/", name: "Home", component: <Home /> },
+				{
+					path: "/",
+					name: "Home",
+					component: <Home />,
+				},
 				{
 					path: "/random-page",
 					name: "Random Page",
@@ -53,9 +58,9 @@ const Sidebar = () => {
 			<div className="h-10" />
 			<button
 				type="button"
-				onClick={toggler}
+				onClick={toggledrop}
 				className={`flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-600 text-center font-semibold ${
-					toggleState
+					drop
 						? "bg-gradient-to-l from-gray-500 to-gray-700 rounded-b-none"
 						: ""
 				}`}
@@ -63,7 +68,7 @@ const Sidebar = () => {
 				<Settings />
 				Customise
 			</button>
-			{toggleState && <CustomMenu />}
+			{drop && <CustomMenu />}
 			<Link
 				to="/wiki/next"
 				className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-600 text-center font-semibold"

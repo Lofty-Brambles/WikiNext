@@ -1,32 +1,43 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, DocumentReference } from "firebase/firestore";
+import React from "react";
+import { useDocumentData } from "react-firebase-hooks/firestore";
+import { useOutletContext, useParams } from "react-router-dom";
+import { Edit, Share } from "react-feather";
 import ReactMarkdown from "react-markdown";
 import remarkToc from "remark-toc";
 import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
-import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
-import { Edit, Share } from "react-feather";
-import { PageSnap } from "../types";
+import rehypeKatex from "rehype-katex";
+import { FileStructure } from "./App";
+import store from "../store";
 import { db } from "../firebase/firebase-init";
-import ContentNav from "../components/content_components/ContentNav";
-import useStore from "../store";
-import Tag from "../components/content_components/Tags";
+import ContentNav from "../components/content-components/ContentNav";
+import Tag from "../components/content-components/Tags";
+
+type PageSnap = {
+	content: string;
+	tags: string[];
+};
 
 const Display = () => {
+	const [snap, load, err] =
+		useOutletContext<[FileStructure | null, boolean, Error | undefined]>();
+
+	// Fetches the page and its details
 	const { name } = useParams();
-	const reference = doc(db, "pages", decodeURIComponent(name!));
-	const [value, load, err] = useDocumentData<PageSnap>(
-		reference as DocumentReference<PageSnap>
+
+	const ref = doc(db, "pages", decodeURIComponent(name!));
+	const [value, loading, error] = useDocumentData<PageSnap>(
+		ref as DocumentReference<PageSnap>
 	);
 
-	const customStyles = useStore(state => state.customFormDtls);
+	// Fetches the styles for the markdown display
+	const customStyles = store(state => state.looks);
 
 	return (
 		<div className="box-border w-full h-[calc(100%-84px)] lg:w-[80vw] flex justify-start items-center flex-col text-center">
-			<ContentNav />
+			<ContentNav snap={snap} load={load} err={err} />
 			<div
 				className={`grow w-full py-10 lg:mr-4 overflow-y-scroll ${
 					// eslint-disable-next-line no-nested-ternary
@@ -40,17 +51,25 @@ const Display = () => {
 						: ""
 				} ${customStyles.darkMode ? "bg-[#0d1117]" : ""}`}
 			>
-				{err && (
-					<code className="text-center text-black">
+				{error && (
+					<code
+						className={`text-center text-black ${
+							customStyles.darkMode ? "text-white" : ""
+						}`}
+					>
 						❗ | An unexpected error occured. Please try again.
 					</code>
 				)}
-				{load && (
-					<code className="text-center text-black">
+				{loading && (
+					<code
+						className={`text-center text-black ${
+							customStyles.darkMode ? "text-white" : ""
+						}`}
+					>
 						🔄 | Loading all content.
 					</code>
 				)}
-				{!load && !err && (
+				{!loading && !error && (
 					<>
 						<div className="flex justify-between items-center gap-2 mb-4">
 							<div className="flex gap-2 whitespace-nowrap flex-wrap">
