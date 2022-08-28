@@ -20,7 +20,7 @@ const Sidebar = () => {
 
 	return (
 		<section
-			className={`fixed box-border h-[calc(100%-84px)] lg:w-[21vw] z-10 right-0 lg:flex flex-col motion-safe:animate-open overflow-auto mt-[84px] p-4 border-l-2 shadow bg-gradient-to-l from-gray-200 to-gray-400 font-serif 2xl:text-lg ${
+			className={`fixed box-border h-[calc(100%-154px)] sm:h-[calc(100%-90px)] lg:w-[21vw] z-10 right-0 lg:flex flex-col motion-safe:animate-open overflow-auto mt-[154px] sm:mt-[90px] p-4 border-l-2 shadow bg-gradient-to-l from-gray-200 to-gray-400 font-serif 2xl:text-lg ${
 				burger ? "flex w-[300px] flex-col" : "hidden"
 			}`}
 		>

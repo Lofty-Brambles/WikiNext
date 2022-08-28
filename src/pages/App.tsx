@@ -2,7 +2,7 @@ import { ref } from "firebase/database";
 import React, { useEffect } from "react";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { Outlet } from "react-router-dom";
-import HeroHead from "../components/base-components/HeroHead";
+import HeroHead from "../components/head-components/HeroHead";
 import Sidebar from "../components/sidebar-components/SideBar";
 import { fs } from "../firebase/firebase-init";
 import store from "../store";

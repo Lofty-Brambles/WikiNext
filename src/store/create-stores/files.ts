@@ -16,12 +16,12 @@ const files = (set: ZustandSetFnType) => ({
 				Object.keys(state.navDrops).map(key => [key, false])
 			),
 		})),
-	turnOffDropsxOne: (val: string) =>
+	turnOffDropsxOne: (val: string, condition: boolean) =>
 		set((state: Global) => ({
 			...state,
 			navDrops: Object.fromEntries(
 				Object.keys(state.navDrops).map(key =>
-					key === val ? [key, true] : [key, false]
+					key === val ? [key, condition] : [key, false]
 				)
 			),
 		})),

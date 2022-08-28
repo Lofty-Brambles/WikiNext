@@ -29,7 +29,7 @@ interface Global {
 	setNavDrops: (v: { [name: string]: boolean }) => void;
 
 	turnOffDrops: () => void;
-	turnOffDropsxOne: (v: string) => void;
+	turnOffDropsxOne: (v: string, c: boolean) => void;
 }
 
 type ZustandSetFnType = (

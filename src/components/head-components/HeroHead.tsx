@@ -1,6 +1,7 @@
 import Hamburger from "hamburger-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 import store from "../../store";
 
 const HeroHead = () => {
@@ -11,9 +12,7 @@ const HeroHead = () => {
 			<Link to="/">
 				<img src="/logo.png" alt="logo" className="h-12" />
 			</Link>
-			<div className="h-4 w-[100%] sm:w-[50vw] order-last sm:order-none justify-self-center">
-				p
-			</div>
+			<SearchBar />
 			<div className="z-30 lg:hidden">
 				<Hamburger
 					size={40}

@@ -37,7 +37,7 @@ const NavDropdown = ({ directory, content }: Props) => {
 
 	// Handler for dropdown states, on clicking one
 	const toggleOptionState = () => {
-		turnOffDropsxOne(content);
+		turnOffDropsxOne(content, !navDrops[content]);
 	};
 
 	// Keyboard handler for the escape button
@@ -46,7 +46,7 @@ const NavDropdown = ({ directory, content }: Props) => {
 	) => {
 		if (e.key === "Escape") {
 			e.preventDefault();
-			turnOffDropsxOne(content);
+			turnOffDropsxOne(content, !navDrops[content]);
 		}
 	};
 
@@ -85,12 +85,12 @@ const NavDropdown = ({ directory, content }: Props) => {
 				onKeyDown={handleBtnKeyDown}
 			>
 				{Object.keys(directory[content]).map(pg => (
-					<li key={pg}>
+					<li key={pg} className="p-1">
 						<Link
 							to={`/wiki/${encodeURIComponent(pg)}`}
 							tabIndex={0}
 							onClick={turnOffDrops}
-							className="flex justify-center items-center p-2 outline-none focus:text-black hover:bg-teal-800"
+							className="flex justify-center items-center p-1 outline-none focus:text-black hover:bg-emerald-800"
 						>
 							{pg}&nbsp;&nbsp;
 							<ExternalLink size={16} />
