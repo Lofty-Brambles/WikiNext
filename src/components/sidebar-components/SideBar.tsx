@@ -70,7 +70,7 @@ const Sidebar = () => {
 			</button>
 			{drop && <CustomMenu />}
 			<Link
-				to="/wiki/next"
+				to="/wiki/wiki-next"
 				className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-600 text-center font-semibold"
 			>
 				<Globe />

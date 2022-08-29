@@ -9,8 +9,11 @@ const HeroHead = () => {
 
 	return (
 		<header className="box-border w-screen p-4 flex justify-between items-center flex-wrap gap-4 lg:justify-evenly bg-gradient-to-b from-slate-900 to-slate-700 border-b-4 border-b-white border-double">
-			<Link to="/">
-				<img src="/logo.png" alt="logo" className="h-12" />
+			<Link
+				to="/"
+				className="flex justify-center items-center gap-3 font-titan text-4xl text-gray-200"
+			>
+				<img src="/favicon.png" alt="logo" className="h-12" /> Wiki
 			</Link>
 			<SearchBar />
 			<div className="z-30 lg:hidden">

@@ -9,17 +9,20 @@ import "./main.css";
 import "./md-style.css";
 import "@szhsin/react-menu/dist/core.css";
 import "@szhsin/react-menu/dist/index.css";
+import SignInScreen from "./pages/SignInScreen";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					{/* <Route index element={<Landing />} />
-				<Route path="/wiki-next" element={<Landing />} /> */}
 					<Route path="/wiki/:name" element={<Display />} />
-					{/*
-				<Route path="" element={<Dashboard />} />
+					<Route path="/sign-in" element={<SignInScreen type="sign-in" />} />
+				{/*
+					<Route path="/wiki/wiki-next" element={<Landing />} />
+					<Route path="/sign-up" element={<SignUpModal />} />
+					
+					<Route path="/reset-password" element={<ResetPasswordModal />} />
 				*/}
 				</Route>
 			</Routes>

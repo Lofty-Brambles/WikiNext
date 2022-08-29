@@ -1,11 +1,18 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
 	content: ["./src/**/*.{ts,tsx}", "./index.html"],
 	theme: {
+		screens: {
+			mdx: "850px",
+			...defaultTheme.screens,
+		},
 		extend: {
 			fontFamily: {
 				titan: ["'Titan One'", "Copperplate", "cursive"],
 				serif: ["Merriweather", "Garamond", "Georgia", "serif"],
+				
 			},
 			animation: {
 				open: "open 0.4s ease-in-out",
@@ -24,8 +31,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [
-		// eslint-disable-next-line global-require
-		require("@tailwindcss/forms"),
-	],
+	plugins: [],
 };
