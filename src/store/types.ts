@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 /* eslint-disable no-unused-vars */
 interface Global {
 	// The sidebar options and dropdowns
@@ -30,6 +32,10 @@ interface Global {
 
 	turnOffDrops: () => void;
 	turnOffDropsxOne: (v: string, c: boolean) => void;
+
+	// The auth states
+	user: User | undefined;
+	setUser: (user: User | undefined) => void;
 }
 
 type ZustandSetFnType = (

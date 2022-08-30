@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "../assets/Monaco-display.png";
-import SignInModal from "../components/auth-components/SignInModal";
+import SignIn from "../components/auth-components/SignIn";
 import store from "../store";
 
 type Props = {
@@ -21,7 +21,7 @@ const SignInScreen = ({ type }: Props) => {
 				alt="wiki-next logo"
 				className="h-[544px] hidden mdx:block"
 			/>
-			{type === "sign-in" && <SignInModal />}
+			{type === "sign-in" && <SignIn />}
 		</div>
 	);
 };
