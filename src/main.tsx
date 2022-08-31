@@ -17,10 +17,21 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 			<Routes>
 				<Route path="/" element={<App />}>
 					<Route path="/wiki/:name" element={<Display />} />
-					<Route path="/sign-in" element={<SignInScreen type="sign-in" />} />
-				{/*
+					<Route
+						path="/sign-in"
+						element={<SignInScreen type="sign-in" />}
+					/>
+					<Route
+						path="/sign-up"
+						element={<SignInScreen type="sign-up" />}
+					/>
+					<Route
+						path="/forgot-password"
+						element={<SignInScreen type="forgot-password" />}
+					/>
+					{/*
 					<Route path="/wiki/wiki-next" element={<Landing />} />
-					<Route path="/sign-up" element={<SignUpModal />} />
+					
 					
 					<Route path="/reset-password" element={<ResetPasswordModal />} />
 				*/}

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { AlertCircle, GitHub, Mail } from "react-feather";
+import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-init";
 import useLoginMethods from "../../hooks/useLoginMethod";
 import store from "../../store";
@@ -9,6 +11,9 @@ import LoginInputs from "../input-components/LoginInputs";
 const SignIn = () => {
 	const [emailVal, setEmailVal] = useState<string>("");
 	const [passVal, setPassVal] = useState<string>("");
+
+	const signInLink = useRef<HTMLAnchorElement | null>(null);
+	const forgotPw = useRef<HTMLAnchorElement | null>(null);
 
 	const [signInEmail, signInGmail, signInGh, loading, success, error] =
 		useLoginMethods(auth);
@@ -40,6 +45,7 @@ const SignIn = () => {
 						name="Log-Out"
 						clickAction={() => {
 							userSetter(undefined);
+							signOut(auth);
 						}}
 						disabled={false}
 						colors={{
@@ -93,6 +99,29 @@ const SignIn = () => {
 							disabled: "bg-blue-300",
 						}}
 					/>
+					<p
+						className={`-mb-1 ${
+							looks.darkMode ? "text-white" : ""
+						}`}
+					>
+						Forgot your password?{" "}
+						<Link
+							to="/forgot-password"
+							style={{
+								color: "blue",
+								textDecoration: "underline",
+							}}
+							ref={forgotPw}
+							onMouseOver={() => {
+								forgotPw.current!.style.color = "purple";
+							}}
+							onMouseLeave={() => {
+								forgotPw.current!.style.color = "blue";
+							}}
+						>
+							Reset it!
+						</Link>
+					</p>
 					<h6
 						className={`font-mono relative before:absolute before:right-8 before:top-[calc(50%-1px)] before:w-[100px] before:h-px after:absolute after:left-8 after:top-[calc(50%-1px)] after:w-[100px] after:h-px ${
 							looks.darkMode
@@ -102,6 +131,29 @@ const SignIn = () => {
 					>
 						OR
 					</h6>
+					<p
+						className={`-mt-1 ${
+							looks.darkMode ? "text-white" : ""
+						}`}
+					>
+						Don&apos;t have an account?{" "}
+						<Link
+							to="/sign-up"
+							style={{
+								color: "blue",
+								textDecoration: "underline",
+							}}
+							ref={signInLink}
+							onMouseOver={() => {
+								signInLink.current!.style.color = "purple";
+							}}
+							onMouseLeave={() => {
+								signInLink.current!.style.color = "blue";
+							}}
+						>
+							Sign up!
+						</Link>
+					</p>
 					<LoginButtons
 						name={
 							<>
@@ -137,7 +189,7 @@ const SignIn = () => {
 						}}
 					/>
 					{loading === true && (
-						<div className="absolute top-0 left-0 w-[300px] sm:w-[357px] h-full flex justify-center items-center">
+						<div className="absolute -top-[2px] -left-[2px] w-[300px] sm:w-[357px] h-[calc(100%+0.25rem)] flex justify-center items-center border-2 border-neutral-400 bg-slate-500 opacity-60">
 							<img
 								className="h-36"
 								src="/loading.gif"

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "../assets/Monaco-display.png";
 import SignIn from "../components/auth-components/SignIn";
+import ForgotPass from "../components/auth-components/ForgotPass";
 import store from "../store";
 
 type Props = {
@@ -22,6 +23,7 @@ const SignInScreen = ({ type }: Props) => {
 				className="h-[544px] hidden mdx:block"
 			/>
 			{type === "sign-in" && <SignIn />}
+			{type === "forgot-password" && <ForgotPass />}
 		</div>
 	);
 };
