@@ -1,20 +1,20 @@
-import React, { useRef, useState } from "react";
-import { AlertCircle, GitHub, Mail } from "react-feather";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { GitHub, Mail } from "react-feather";
 import { auth } from "../../firebase/firebase-init";
 import useLoginMethods from "../../hooks/useLoginMethod";
 import store from "../../store";
 import LoginButtons from "../input-components/LoginButtons";
 import LoginInputs from "../input-components/LoginInputs";
 import AlreadyIn from "./AlreadyIn";
+import AuthHeaders from "./AuthHeaders";
+import LinkTxt from "./LinkTxt";
 
 const SignIn = () => {
+	// Form elements
 	const [emailVal, setEmailVal] = useState<string>("");
 	const [passVal, setPassVal] = useState<string>("");
 
-	const signInLink = useRef<HTMLAnchorElement | null>(null);
-	const forgotPw = useRef<HTMLAnchorElement | null>(null);
-
+	// Hook for log-in methods
 	const [signInEmail, signInGmail, signInGh, loading, error] =
 		useLoginMethods(auth);
 	const [looks, user] = store(state => [state.looks, state.user]);
@@ -40,20 +40,7 @@ const SignIn = () => {
 						looks.darkMode ? "bg-slate-900" : "bg-slate-100"
 					}`}
 				>
-					<div
-						className={`flex justify-center items-center gap-3 font-titan text-4xl ${
-							looks.darkMode ? "text-white" : ""
-						}`}
-					>
-						<img src="/favicon.png" alt="icon" className="w-12" />
-						Wiki
-					</div>
-					{error !== undefined && (
-						<div className="w-full px-3 py-2 flex justify-start items-center gap-4 rounded border-2 border-red-700 font-serif text-sm text-red-700">
-							<AlertCircle color="red" />
-							<span className="flex-grow">{error.code}</span>
-						</div>
-					)}
+					<AuthHeaders error={error} loading={loading} />
 					<LoginInputs
 						name="Email Address"
 						type="email"
@@ -80,29 +67,12 @@ const SignIn = () => {
 							hover: "hover:bg-blue-600",
 						}}
 					/>
-					<p
-						className={`-mb-1 ${
-							looks.darkMode ? "text-white" : ""
-						}`}
-					>
-						Forgot your password?{" "}
-						<Link
-							to="/forgot-password"
-							style={{
-								color: "blue",
-								textDecoration: "underline",
-							}}
-							ref={forgotPw}
-							onMouseOver={() => {
-								forgotPw.current!.style.color = "purple";
-							}}
-							onMouseLeave={() => {
-								forgotPw.current!.style.color = "blue";
-							}}
-						>
-							Reset it!
-						</Link>
-					</p>
+					<LinkTxt
+						className="-mb-2"
+						nonLinkTxt="Forgot your password?"
+						linkTxt="Reset it!"
+						to="/forgot-password"
+					/>
 					<h6
 						className={`font-mono relative before:absolute before:right-8 before:top-[calc(50%-1px)] before:w-[100px] before:h-px after:absolute after:left-8 after:top-[calc(50%-1px)] after:w-[100px] after:h-px ${
 							looks.darkMode
@@ -112,29 +82,12 @@ const SignIn = () => {
 					>
 						OR
 					</h6>
-					<p
-						className={`-mt-1 ${
-							looks.darkMode ? "text-white" : ""
-						}`}
-					>
-						Don&apos;t have an account?{" "}
-						<Link
-							to="/sign-up"
-							style={{
-								color: "blue",
-								textDecoration: "underline",
-							}}
-							ref={signInLink}
-							onMouseOver={() => {
-								signInLink.current!.style.color = "purple";
-							}}
-							onMouseLeave={() => {
-								signInLink.current!.style.color = "blue";
-							}}
-						>
-							Sign up!
-						</Link>
-					</p>
+					<LinkTxt
+						className="-mt-2"
+						nonLinkTxt="Don't have an account?"
+						linkTxt="Sign up!"
+						to="/sign-up"
+					/>
 					<LoginButtons
 						name={
 							<>
@@ -169,15 +122,6 @@ const SignIn = () => {
 								: "hover:bg-gray-800",
 						}}
 					/>
-					{loading === true && (
-						<div className="absolute -top-[2px] -left-[2px] w-[300px] sm:w-[357px] h-[calc(100%+0.25rem)] flex justify-center items-center border-2 border-neutral-400 bg-slate-500 opacity-60">
-							<img
-								className="h-36"
-								src="/loading.gif"
-								alt="loading"
-							/>
-						</div>
-					)}
 				</form>
 			)}
 		</>
