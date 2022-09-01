@@ -1,10 +1,11 @@
 import { ref } from "firebase/database";
 import React, { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { Outlet } from "react-router-dom";
 import HeroHead from "../components/head-components/HeroHead";
 import Sidebar from "../components/sidebar-components/SideBar";
-import { fs } from "../firebase/firebase-init";
+import { auth, fs } from "../firebase/firebase-init";
 import store from "../store";
 
 type FileStructure = {
@@ -43,6 +44,12 @@ const App = () => {
 			);
 		}
 	}, [snap]);
+
+	const [user] = useAuthState(auth);
+	const setter = store(state => state.setUser);
+	useEffect(() => {
+		setter(user === null ? undefined : user);
+	}, [user]);
 
 	return (
 		<>

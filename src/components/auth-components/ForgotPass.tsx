@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { AuthError, signOut } from "firebase/auth";
+import React, { useRef, useState } from "react";
+import { AuthError } from "firebase/auth";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { AlertCircle, Send } from "react-feather";
+import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase-init";
 import store from "../../store";
 import LoginButtons from "../input-components/LoginButtons";
 import LoginInputs from "../input-components/LoginInputs";
+import AlreadyIn from "./AlreadyIn";
 
 const ForgotPass = () => {
 	const [email, setEmail] = useState<string>("");
@@ -13,11 +15,9 @@ const ForgotPass = () => {
 	const [sendPasswordResetEmail, loading, error] =
 		useSendPasswordResetEmail(auth);
 
-	const [user, userSetter, looks] = store(state => [
-		state.user,
-		state.setUser,
-		state.looks,
-	]);
+	const [user, looks] = store(state => [state.user, state.looks]);
+
+	const signInPage = useRef<HTMLAnchorElement>(null);
 
 	const emailValidation = () =>
 		!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -28,25 +28,7 @@ const ForgotPass = () => {
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
 			{user !== undefined ? (
-				<div
-					className={`p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-						looks.darkMode ? "bg-slate-900" : "bg-slate-100"
-					}`}
-				>
-					<p>✅ You are already logged in! Click below to log out.</p>
-					<LoginButtons
-						name="Log-Out"
-						clickAction={() => {
-							userSetter(undefined);
-							signOut(auth);
-						}}
-						disabled={false}
-						colors={{
-							main: "bg-blue-700",
-							disabled: "bg-blue-300",
-						}}
-					/>
-				</div>
+				<AlreadyIn />
 			) : (
 				<form
 					className={`relative p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
@@ -90,9 +72,33 @@ const ForgotPass = () => {
 						disabled={emailValidation()}
 						colors={{
 							main: "bg-blue-700",
-							disabled: "bg-blue-300",
+							disabled: "disabled:bg-blue-300",
+							hover: "hover:bg-blue-600",
 						}}
 					/>
+					<p
+						className={`-mt-1 ${
+							looks.darkMode ? "text-white" : ""
+						}`}
+					>
+						Remember your passord?{" "}
+						<Link
+							to="/sign-in"
+							style={{
+								color: "blue",
+								textDecoration: "underline",
+							}}
+							ref={signInPage}
+							onMouseOver={() => {
+								signInPage.current!.style.color = "purple";
+							}}
+							onMouseLeave={() => {
+								signInPage.current!.style.color = "blue";
+							}}
+						>
+							Sign in!
+						</Link>
+					</p>
 					{loading === true && (
 						<div className="absolute -top-[2px] -left-[2px] w-[300px] sm:w-[357px] h-[calc(100%+0.25rem)] flex justify-center items-center border-2 border-neutral-400 bg-slate-500 opacity-60">
 							<img

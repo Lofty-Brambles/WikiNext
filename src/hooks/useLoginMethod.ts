@@ -2,8 +2,10 @@ import { useMemo, useState } from "react";
 import {
 	Auth,
 	AuthError,
+	browserSessionPersistence,
 	GithubAuthProvider,
 	GoogleAuthProvider,
+	setPersistence,
 	signInWithEmailAndPassword,
 	signInWithPopup,
 } from "firebase/auth";
@@ -15,14 +17,12 @@ type Return = [
 	() => Promise<void>,
 	() => Promise<void>,
 	boolean,
-	boolean,
 	AuthError | undefined
 ];
 
 const useLoginMethods = (auth: Auth): Return => {
 	const [error, setError] = useState<AuthError | undefined>(undefined);
 	const [loading, setLoading] = useState<boolean>(false);
-	const [success, setSuccess] = useState<boolean>(false);
 
 	const userSetter = store(state => state.setUser);
 
@@ -32,13 +32,13 @@ const useLoginMethods = (auth: Auth): Return => {
 		setError(undefined);
 
 		try {
+			await setPersistence(auth, browserSessionPersistence);
 			const user = await signInWithEmailAndPassword(auth, email, pass);
 			userSetter(user.user);
 		} catch (e) {
 			setError(e as AuthError);
 		} finally {
 			setLoading(false);
-			setSuccess(true);
 		}
 	};
 
@@ -49,13 +49,13 @@ const useLoginMethods = (auth: Auth): Return => {
 
 		try {
 			const provider = new GoogleAuthProvider();
+			await setPersistence(auth, browserSessionPersistence);
 			const user = await signInWithPopup(auth, provider);
 			userSetter(user.user);
 		} catch (e) {
 			setError(e as AuthError);
 		} finally {
 			setLoading(false);
-			setSuccess(true);
 		}
 	};
 
@@ -66,13 +66,13 @@ const useLoginMethods = (auth: Auth): Return => {
 
 		try {
 			const provider = new GithubAuthProvider();
+			await setPersistence(auth, browserSessionPersistence);
 			const user = await signInWithPopup(auth, provider);
 			userSetter(user.user);
 		} catch (e) {
 			setError(e as AuthError);
 		} finally {
 			setLoading(false);
-			setSuccess(true);
 		}
 	};
 
@@ -81,7 +81,6 @@ const useLoginMethods = (auth: Auth): Return => {
 		signInWithGmail,
 		signInWithGh,
 		loading,
-		success,
 		error,
 	];
 

@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { AlertCircle, GitHub, Mail } from "react-feather";
 import { Link } from "react-router-dom";
-import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-init";
 import useLoginMethods from "../../hooks/useLoginMethod";
 import store from "../../store";
 import LoginButtons from "../input-components/LoginButtons";
 import LoginInputs from "../input-components/LoginInputs";
+import AlreadyIn from "./AlreadyIn";
 
 const SignIn = () => {
 	const [emailVal, setEmailVal] = useState<string>("");
@@ -15,9 +15,9 @@ const SignIn = () => {
 	const signInLink = useRef<HTMLAnchorElement | null>(null);
 	const forgotPw = useRef<HTMLAnchorElement | null>(null);
 
-	const [signInEmail, signInGmail, signInGh, loading, success, error] =
+	const [signInEmail, signInGmail, signInGh, loading, error] =
 		useLoginMethods(auth);
-	const [userSetter, user] = store(state => [state.setUser, state.user]);
+	const [looks, user] = store(state => [state.looks, state.user]);
 
 	const signInValidation = () => {
 		const emailIsValid =
@@ -29,31 +29,11 @@ const SignIn = () => {
 		return !(emailIsValid && passIsValid);
 	};
 
-	const looks = store(state => state.looks);
-
 	return (
 		// eslint-disable-next-line react/jsx-no-useless-fragment
 		<>
-			{success && user !== undefined ? (
-				<div
-					className={`p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-						looks.darkMode ? "bg-slate-900" : "bg-slate-100"
-					}`}
-				>
-					<p>✅ You are already logged in! Click below to log out.</p>
-					<LoginButtons
-						name="Log-Out"
-						clickAction={() => {
-							userSetter(undefined);
-							signOut(auth);
-						}}
-						disabled={false}
-						colors={{
-							main: "bg-blue-700",
-							disabled: "bg-blue-300",
-						}}
-					/>
-				</div>
+			{user !== undefined ? (
+				<AlreadyIn />
 			) : (
 				<form
 					className={`relative p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
@@ -96,7 +76,8 @@ const SignIn = () => {
 						disabled={signInValidation()}
 						colors={{
 							main: "bg-blue-700",
-							disabled: "bg-blue-300",
+							disabled: "disabled:bg-blue-300",
+							hover: "hover:bg-blue-600",
 						}}
 					/>
 					<p
@@ -166,7 +147,7 @@ const SignIn = () => {
 						disabled={false}
 						colors={{
 							main: "bg-red-600",
-							hover: "bg-red-500",
+							hover: "hover:bg-red-500",
 						}}
 					/>
 					<LoginButtons
@@ -184,8 +165,8 @@ const SignIn = () => {
 								? "bg-gray-500"
 								: "bg-gray-900",
 							hover: looks.darkMode
-								? "bg-gray-400"
-								: "bg-gray-800",
+								? "hover:bg-gray-400"
+								: "hover:bg-gray-800",
 						}}
 					/>
 					{loading === true && (

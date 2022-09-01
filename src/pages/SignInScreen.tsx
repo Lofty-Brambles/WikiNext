@@ -3,6 +3,7 @@ import Image from "../assets/Monaco-display.png";
 import SignIn from "../components/auth-components/SignIn";
 import ForgotPass from "../components/auth-components/ForgotPass";
 import store from "../store";
+import SignUp from "../components/auth-components/SignUp";
 
 type Props = {
 	type: "sign-in" | "sign-up" | "forgot-password";
@@ -24,6 +25,7 @@ const SignInScreen = ({ type }: Props) => {
 			/>
 			{type === "sign-in" && <SignIn />}
 			{type === "forgot-password" && <ForgotPass />}
+			{type === "sign-up" && <SignUp />}
 		</div>
 	);
 };
