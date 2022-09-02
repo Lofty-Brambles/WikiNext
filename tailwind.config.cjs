@@ -12,7 +12,6 @@ module.exports = {
 			fontFamily: {
 				titan: ["'Titan One'", "Copperplate", "cursive"],
 				serif: ["Merriweather", "Garamond", "Georgia", "serif"],
-				
 			},
 			animation: {
 				open: "open 0.4s ease-in-out",

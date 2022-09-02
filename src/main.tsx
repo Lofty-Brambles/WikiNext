@@ -4,12 +4,13 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./pages/App";
 import Display from "./pages/Display";
+import SignInScreen from "./pages/SignInScreen";
+import User from "./pages/User";
 
 import "./main.css";
 import "./md-style.css";
 import "@szhsin/react-menu/dist/core.css";
 import "@szhsin/react-menu/dist/index.css";
-import SignInScreen from "./pages/SignInScreen";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
@@ -29,11 +30,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 						path="/forgot-password"
 						element={<SignInScreen type="forgot-password" />}
 					/>
+					<Route path="/user" element={<User />} />
 					{/*
 					<Route path="/wiki/wiki-next" element={<Landing />} />
-					
-					
-					<Route path="/reset-password" element={<ResetPasswordModal />} />
+					<Route path="/user" element={<UserPages />} >
 				*/}
 				</Route>
 			</Routes>

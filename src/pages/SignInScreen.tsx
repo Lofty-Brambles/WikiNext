@@ -14,7 +14,7 @@ const SignInScreen = ({ type }: Props) => {
 
 	return (
 		<div
-			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-10px)] flex justify-center items-center gap-4 overflow-y-scroll ${
+			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-12px)] flex justify-center items-center gap-4 overflow-y-scroll ${
 				looks.darkMode ? "bg-gray-600" : "bg-zinc-200"
 			}`}
 		>

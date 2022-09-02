@@ -1,22 +1,24 @@
 import React from "react";
-import {
-	Bookmark,
-	Globe,
-	HelpCircle,
-	Home,
-	Settings,
-	User,
-} from "react-feather";
+import { Bookmark, HelpCircle, Home, Settings, User } from "react-feather";
 import { Link } from "react-router-dom";
 import store from "../../store";
 import CustomMenu from "./CustomiseDrop";
 
 const Sidebar = () => {
-	const [burger, drop, toggledrop] = store(state => [
+	const [burger, drop, toggledrop, fileStore, user] = store(state => [
 		state.burger,
 		state.sideDropdown,
 		state.toggleSideDropdown,
+		state.fileStore,
+		state.user,
 	]);
+
+	const randomPage = () => {
+		const pageArr = Object.keys(fileStore);
+		return encodeURIComponent(
+			pageArr[Math.floor(Math.random() * pageArr.length)]
+		);
+	};
 
 	return (
 		<section
@@ -31,19 +33,25 @@ const Sidebar = () => {
 					component: <Home />,
 				},
 				{
-					path: "/random-page",
-					name: "Random Page",
-					component: <HelpCircle />,
-				},
-				{
 					path: "/user/bookmarks",
 					name: "Bookmarks",
 					component: <Bookmark />,
 				},
 				{
-					path: "/user/account",
+					path: user === undefined ? "/sign-in" : "/user",
 					name: "Account",
-					component: <User />,
+					component:
+						user !== undefined &&
+						user?.providerData[0].photoURL !== null ? (
+							<img
+								referrerPolicy="no-referrer"
+								src={user.providerData[0].photoURL}
+								alt="pfp"
+								className="w-6 rounded-full border-2 border-black"
+							/>
+						) : (
+							<User />
+						),
 				},
 			].map(e => (
 				<Link
@@ -69,13 +77,16 @@ const Sidebar = () => {
 				Customise
 			</button>
 			{drop && <CustomMenu />}
-			<Link
-				to="/wiki/wiki-next"
+			<a
+				href={`/wiki/${randomPage()}`}
+				onClick={e => {
+					e.currentTarget.href = `/wiki/${randomPage()}`;
+				}}
 				className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-600 text-center font-semibold"
 			>
-				<Globe />
-				About
-			</Link>
+				<HelpCircle />
+				Random Page
+			</a>
 		</section>
 	);
 };

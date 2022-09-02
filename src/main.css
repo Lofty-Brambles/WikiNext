@@ -9,6 +9,7 @@
 
 .out-none {
 	box-shadow: none !important;
+	outline: none;
 }
 
 .floater:focus + label {

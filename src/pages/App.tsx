@@ -1,5 +1,5 @@
-import { ref } from "firebase/database";
 import React, { useEffect } from "react";
+import { ref } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
 import { Outlet } from "react-router-dom";
@@ -47,6 +47,7 @@ const App = () => {
 
 	const [user] = useAuthState(auth);
 	const setter = store(state => state.setUser);
+
 	useEffect(() => {
 		setter(user === null ? undefined : user);
 	}, [user]);

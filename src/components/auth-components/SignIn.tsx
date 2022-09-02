@@ -3,8 +3,8 @@ import { GitHub, Mail } from "react-feather";
 import { auth } from "../../firebase/firebase-init";
 import useLoginMethods from "../../hooks/useLoginMethod";
 import store from "../../store";
-import LoginButtons from "../input-components/LoginButtons";
-import LoginInputs from "../input-components/LoginInputs";
+import LoginButtons from "../input-components/Button";
+import LoginInputs from "../input-components/LoginInput";
 import AlreadyIn from "./AlreadyIn";
 import AuthHeaders from "./AuthHeaders";
 import LinkTxt from "./LinkTxt";
@@ -83,7 +83,7 @@ const SignIn = () => {
 						OR
 					</h6>
 					<LinkTxt
-						className="-mt-2"
+						className="-mt-3"
 						nonLinkTxt="Don't have an account?"
 						linkTxt="Sign up!"
 						to="/sign-up"

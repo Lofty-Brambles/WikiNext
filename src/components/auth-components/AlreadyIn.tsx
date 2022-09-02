@@ -2,7 +2,7 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-init";
 import store from "../../store";
-import LoginButtons from "../input-components/LoginButtons";
+import LoginButtons from "../input-components/Button";
 
 const AlreadyIn = () => {
 	const [userSetter, looks] = store(state => [state.setUser, state.looks]);
