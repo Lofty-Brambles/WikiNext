@@ -38,7 +38,7 @@ const Sidebar = () => {
 					component: <Bookmark />,
 				},
 				{
-					path: user === undefined ? "/sign-in" : "/user",
+					path: user === undefined ? "/sign-in" : "/user/edits",
 					name: "Account",
 					component:
 						user !== undefined &&

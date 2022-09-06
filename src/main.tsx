@@ -7,6 +7,9 @@ import Display from "./pages/Display";
 import SignInScreen from "./pages/SignInScreen";
 import User from "./pages/User";
 
+import Edits from "./components/user-components/Edits";
+import Bookmarks from "./components/user-components/Bookmarks";
+
 import "./main.css";
 import "./md-style.css";
 import "@szhsin/react-menu/dist/core.css";
@@ -30,7 +33,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 						path="/forgot-password"
 						element={<SignInScreen type="forgot-password" />}
 					/>
-					<Route path="/user" element={<User />} />
+					<Route path="/user" element={<User />}>
+						<Route path="/user/edits" element={<Edits />} />
+						<Route path="/user/bookmarks" element={<Bookmarks />} />
+					</Route>
 					{/*
 					<Route path="/wiki/wiki-next" element={<Landing />} />
 					<Route path="/user" element={<UserPages />} >

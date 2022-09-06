@@ -4,6 +4,7 @@ import Details from "../components/user-components/Details";
 import LoginButtons from "../components/input-components/Button";
 import store from "../store";
 import Image from "../assets/Monaco-display.png";
+import TabbedInfo from "../components/user-components/TabbedInfo";
 
 // eslint-disable-next-line arrow-body-style
 const User = () => {
@@ -28,7 +29,8 @@ const User = () => {
 				}`}
 			>
 				<p className="text-center">
-					🟥 You aren&apos;t actually logged in!
+					🟥 You aren&apos;t actually logged in! Log in to access
+					multiple features!
 				</p>
 				<LoginButtons
 					name="Log in"
@@ -45,8 +47,8 @@ const User = () => {
 		</div>
 	) : (
 		<div
-			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-12px)] py-10 flex justify-start items-center flex-col overflow-y-scroll ${
-				looks.darkMode ? "bg-[#0d1117] text-white" : ""
+			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-12px)] py-10 flex justify-start items-center flex-col gap-8 overflow-y-scroll ${
+				looks.darkMode ? "bg-[#0d1117] text-white" : "bg-slate-100"
 			} ${looks.sans ? "sans" : "font-serif"} ${
 				// eslint-disable-next-line no-nested-ternary
 				looks.sideSpace === "sm"
@@ -60,6 +62,7 @@ const User = () => {
 			}`}
 		>
 			<Details />
+			<TabbedInfo />
 		</div>
 	);
 };
