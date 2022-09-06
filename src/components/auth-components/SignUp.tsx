@@ -4,7 +4,7 @@ import { CheckCircle } from "react-feather";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase-init";
 import store from "../../store";
-import LoginButtons from "../input-components/Button";
+import Buttons from "../input-components/Button";
 import LoginInputs from "../input-components/LoginInput";
 import AlreadyIn from "./AlreadyIn";
 import AuthHeaders from "./AuthHeaders";
@@ -90,7 +90,7 @@ const SignUp = () => {
 						setVal={setConPass}
 						error={!passMatchesConfPass()}
 					/>
-					<LoginButtons
+					<Buttons
 						name="Sign up"
 						clickAction={() => {
 							createUser(email, pass);

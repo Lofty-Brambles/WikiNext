@@ -3,7 +3,7 @@ import { GitHub, Mail } from "react-feather";
 import { auth } from "../../firebase/firebase-init";
 import useLoginMethods from "../../hooks/useLoginMethod";
 import store from "../../store";
-import LoginButtons from "../input-components/Button";
+import Buttons from "../input-components/Button";
 import LoginInputs from "../input-components/LoginInput";
 import AlreadyIn from "./AlreadyIn";
 import AuthHeaders from "./AuthHeaders";
@@ -55,7 +55,7 @@ const SignIn = () => {
 						setVal={setPassVal}
 						error={false}
 					/>
-					<LoginButtons
+					<Buttons
 						name="Log-in"
 						clickAction={() => {
 							signInEmail(emailVal, passVal);
@@ -88,7 +88,7 @@ const SignIn = () => {
 						linkTxt="Sign up!"
 						to="/sign-up"
 					/>
-					<LoginButtons
+					<Buttons
 						name={
 							<>
 								<Mail color="white" size={24} /> Gmail
@@ -103,7 +103,7 @@ const SignIn = () => {
 							hover: "hover:bg-red-500",
 						}}
 					/>
-					<LoginButtons
+					<Buttons
 						name={
 							<>
 								<GitHub color="white" size={24} /> Github

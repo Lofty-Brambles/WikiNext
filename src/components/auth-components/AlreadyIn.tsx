@@ -2,7 +2,7 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase-init";
 import store from "../../store";
-import LoginButtons from "../input-components/Button";
+import Buttons from "../input-components/Button";
 
 const AlreadyIn = () => {
 	const [userSetter, looks] = store(state => [state.setUser, state.looks]);
@@ -14,7 +14,7 @@ const AlreadyIn = () => {
 			}`}
 		>
 			<p className="text-center">✅ You are already logged in!</p>
-			<LoginButtons
+			<Buttons
 				name="Log-Out"
 				clickAction={() => {
 					userSetter(undefined);

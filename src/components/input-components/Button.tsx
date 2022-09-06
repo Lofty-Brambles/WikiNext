@@ -14,7 +14,7 @@ type Props = {
 	textSize?: string;
 };
 
-const LoginButtons = ({
+const Buttons = ({
 	name,
 	clickAction,
 	disabled,
@@ -37,4 +37,4 @@ const LoginButtons = ({
 	</button>
 );
 
-export default LoginButtons;
+export default Buttons;
