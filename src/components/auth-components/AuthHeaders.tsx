@@ -8,12 +8,17 @@ type LoginErrorProps = {
 	error: AuthError;
 };
 
-const LoginError = ({ error }: LoginErrorProps) => (
-	<div className="w-full px-3 py-2 flex justify-start items-center gap-4 rounded border-2 border-red-700 font-serif text-sm text-red-700">
-		<AlertCircle color="red" />
-		<span className="flex-grow">{error.code}</span>
-	</div>
-);
+const LoginError = ({ error }: LoginErrorProps) => {
+	const sans = store(state => state.userData.customise_sans);
+	return (
+		<div className="w-full px-3 py-2 flex justify-start items-center gap-4 rounded border-2 border-red-700 font-serif text-sm text-red-700">
+			<AlertCircle color="red" />
+			<span className={`flex-grow ${sans ? "font-sans" : "font-serif"}`}>
+				{error.code}
+			</span>
+		</div>
+	);
+};
 
 // Loading prompts for the login modals
 const LoginLoading = () => (
@@ -24,12 +29,12 @@ const LoginLoading = () => (
 
 // The logo for the login modals
 const WikiLogo = () => {
-	const looks = store(state => state.looks);
+	const darkMode = store(state => state.userData.customise_darkMode);
 
 	return (
 		<div
 			className={`flex justify-center items-center gap-3 font-titan text-4xl ${
-				looks.darkMode ? "text-white" : ""
+				darkMode ? "text-white" : ""
 			}`}
 		>
 			<img src="/favicon.png" alt="icon" className="w-12" />

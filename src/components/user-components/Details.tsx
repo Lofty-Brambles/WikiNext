@@ -9,10 +9,10 @@ const Details = () => {
 	const [editMode, setEditMode] = useState<boolean>(false);
 	const [val, setVal] = useState<string>("");
 
-	const [user, userSetter, looks] = store(state => [
+	const [user, userSetter, darkMode] = store(state => [
 		state.user,
 		state.setUser,
-		state.looks,
+		state.userData.customise_darkMode,
 	]);
 
 	return (
@@ -36,9 +36,7 @@ const Details = () => {
 									setVal(e.currentTarget.value);
 								}}
 								className={`w-60 sm:w-[30vw] p-1 px-3 py-3 border border-neutral-400 rounded outline-none focus:border-blue-700 shadow-lg ${
-									looks.darkMode
-										? "bg-slate-700"
-										: "bg-slate-100"
+									darkMode ? "bg-slate-700" : "bg-slate-100"
 								}`}
 							/>
 							<button

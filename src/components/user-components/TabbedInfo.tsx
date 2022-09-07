@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import store from "../../store";
 
 const TabbedList = () => {
-	const looks = store(state => state.looks);
+	const darkMode = store(state => state.userData.customise_darkMode);
 	return (
 		<ul role="tablist" className="flex w-full">
 			<li role="presentation">
@@ -12,7 +12,7 @@ const TabbedList = () => {
 					role="tab"
 					tabIndex={0}
 					className={`block mr-[5px] px-5 py-[15px] bg-slate-500 border-x border-t font-bold ${
-						looks.darkMode ? "border-white" : "border-black"
+						darkMode ? "border-white" : "border-black"
 					}`}
 				>
 					Edits
@@ -24,7 +24,7 @@ const TabbedList = () => {
 					role="tab"
 					tabIndex={0}
 					className={`block mr-[5px] px-5 py-[15px] bg-slate-500 border-x border-t font-bold ${
-						looks.darkMode ? "border-white" : "border-black"
+						darkMode ? "border-white" : "border-black"
 					}`}
 				>
 					Bookmarks

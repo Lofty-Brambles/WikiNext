@@ -10,12 +10,12 @@ type Props = {
 };
 
 const SignInScreen = ({ type }: Props) => {
-	const looks = store(state => state.looks);
+	const darkMode = store(state => state.userData.customise_darkMode);
 
 	return (
 		<div
 			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-12px)] flex justify-center items-center gap-4 overflow-y-scroll ${
-				looks.darkMode ? "bg-gray-600" : "bg-zinc-200"
+				darkMode ? "bg-gray-600" : "bg-zinc-200"
 			}`}
 		>
 			<img

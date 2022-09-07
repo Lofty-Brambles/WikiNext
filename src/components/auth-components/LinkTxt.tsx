@@ -12,10 +12,17 @@ type Props = {
 const LinkTxt = ({ className, nonLinkTxt, linkTxt, to }: Props) => {
 	const linkRef = useRef<HTMLAnchorElement>(null);
 
-	const looks = store(state => state.looks);
+	const [darkMode, sans] = store(state => [
+		state.userData.customise_darkMode,
+		state.userData.customise_sans,
+	]);
 
 	return (
-		<p className={`${className} ${looks.darkMode ? "text-white" : ""}`}>
+		<p
+			className={`${className} ${darkMode ? "text-white" : ""} ${
+				sans ? "font-sans" : "font-serif"
+			}`}
+		>
 			{`${nonLinkTxt} `}
 			<Link
 				to={to}

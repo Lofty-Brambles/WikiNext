@@ -1,4 +1,5 @@
 import { User } from "firebase/auth";
+import { UserDataType } from "../hooks-&-utils/fetch-user-data";
 
 /* eslint-disable no-unused-vars */
 interface Global {
@@ -8,13 +9,7 @@ interface Global {
 	sideDropdown: boolean;
 	toggleSideDropdown: () => void;
 
-	// The markdown looks and settings
-	looks: {
-		sans: boolean;
-		darkMode: boolean;
-		sideSpace: "sm" | "md" | "lg";
-		justify: boolean;
-	};
+	// The markdown settings togglers
 	toggleFont: () => void;
 	toggleDarkMode: () => void;
 	toggleSideSpace: (v: "sm" | "md" | "lg") => void;
@@ -36,6 +31,8 @@ interface Global {
 	// The auth states
 	user: User | undefined;
 	setUser: (user: User | undefined) => void;
+	userData: UserDataType;
+	initUserData: (userData: UserDataType) => void;
 }
 
 type ZustandSetFnType = (

@@ -7,7 +7,12 @@ import store from "../../store";
 
 const CustomMenu = () => {
 	const [looks, tFont, tDark, tSpace, tJust] = store(state => [
-		state.looks,
+		{
+			sans: state.userData.customise_sans,
+			darkMode: state.userData.customise_darkMode,
+			sideSpace: state.userData.customise_sideSpace,
+			justify: state.userData.customise_justify,
+		},
 		state.toggleFont,
 		state.toggleDarkMode,
 		state.toggleSideSpace,

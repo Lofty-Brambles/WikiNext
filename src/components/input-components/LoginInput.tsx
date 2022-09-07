@@ -12,7 +12,10 @@ type Props = {
 
 const LoginInputs = ({ name, type, val, setVal, error }: Props) => {
 	const [err, setErr] = useState<boolean>(false);
-	const looks = store(state => state.looks);
+	const [darkMode, sans] = store(state => [
+		state.userData.customise_darkMode,
+		state.userData.customise_sans,
+	]);
 
 	useEffect(() => {
 		setErr(error);
@@ -20,7 +23,9 @@ const LoginInputs = ({ name, type, val, setVal, error }: Props) => {
 
 	return (
 		<div
-			className={`relative w-full ${looks.darkMode ? "text-white" : ""}`}
+			className={`relative w-full ${darkMode ? "text-white" : ""} ${
+				sans ? "font-sans" : "font-serif"
+			}`}
 		>
 			<input
 				type={type}
@@ -40,7 +45,7 @@ const LoginInputs = ({ name, type, val, setVal, error }: Props) => {
 						? "transition-transform ease-in-out scale-75 -translate-x-3 -translate-y-5 border-blue-700"
 						: ""
 				} ${err === true ? "text-red-600" : ""} ${
-					looks.darkMode ? "bg-slate-900" : " bg-slate-100"
+					darkMode ? "bg-slate-900" : " bg-slate-100"
 				}`}
 			>
 				{name}...

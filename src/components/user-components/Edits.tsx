@@ -2,11 +2,11 @@ import React from "react";
 import store from "../../store";
 
 const Edits = () => {
-	const looks = store(state => state.looks);
+	const darkMode = store(state => state.userData.customise_darkMode);
 	return (
 		<section
 			className={`w-full p-5 border ${
-				looks.darkMode ? "border-white" : "border-black"
+				darkMode ? "border-white" : "border-black"
 			}`}
 		>
 			p

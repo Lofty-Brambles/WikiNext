@@ -33,7 +33,12 @@ const Display = () => {
 	);
 
 	// Fetches the styles for the markdown display
-	const customStyles = store(state => state.looks);
+	const [darkMode, sans, sideSpace, justify] = store(state => [
+		state.userData.customise_darkMode,
+		state.userData.customise_sans,
+		state.userData.customise_sideSpace,
+		state.userData.customise_justify,
+	]);
 
 	return (
 		<div className="box-border w-full h-[calc(100%-84px)] lg:w-[80vw] flex justify-start items-center flex-col text-center">
@@ -41,20 +46,20 @@ const Display = () => {
 			<div
 				className={`grow w-full py-10 lg:mr-6 overflow-y-scroll ${
 					// eslint-disable-next-line no-nested-ternary
-					customStyles.sideSpace === "sm"
+					sideSpace === "sm"
 						? "px-10"
 						: // eslint-disable-next-line no-nested-ternary
-						customStyles.sideSpace === "md"
+						sideSpace === "md"
 						? "px-20"
-						: customStyles.sideSpace === "lg"
+						: sideSpace === "lg"
 						? "px-[7.5rem]"
 						: ""
-				} ${customStyles.darkMode ? "bg-[#0d1117]" : ""}`}
+				} ${darkMode ? "bg-[#0d1117]" : ""}`}
 			>
 				{error && (
 					<code
 						className={`text-center text-black ${
-							customStyles.darkMode ? "text-white" : ""
+							darkMode ? "text-white" : ""
 						}`}
 					>
 						❗ | An unexpected error occured. Please try again.
@@ -63,7 +68,7 @@ const Display = () => {
 				{loading && (
 					<code
 						className={`text-center text-black ${
-							customStyles.darkMode ? "text-white" : ""
+							darkMode ? "text-white" : ""
 						}`}
 					>
 						🔄 | Loading all content.
@@ -79,7 +84,7 @@ const Display = () => {
 							</div>
 							<div
 								className={`flex ${
-									customStyles.darkMode ? "text-white" : ""
+									darkMode ? "text-white" : ""
 								}`}
 							>
 								<button
@@ -113,9 +118,9 @@ const Display = () => {
 						</div>
 						<ReactMarkdown
 							className={`markdown-body text-left ${
-								customStyles.sans ? "sans" : ""
-							} ${customStyles.darkMode ? "dark" : ""} ${
-								customStyles.justify ? "text-justify" : ""
+								sans ? "sans" : ""
+							} ${darkMode ? "dark" : ""} ${
+								justify ? "text-justify" : ""
 							}`}
 							remarkPlugins={[remarkToc, remarkMath, remarkGfm]}
 							rehypePlugins={[rehypeKatex, rehypeSlug]}

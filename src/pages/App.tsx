@@ -7,6 +7,7 @@ import HeroHead from "../components/head-components/HeroHead";
 import Sidebar from "../components/sidebar-components/SideBar";
 import { auth, fs } from "../firebase/firebase-init";
 import store from "../store";
+import fetchUserData, { UserDataInit } from "../hooks-&-utils/fetch-user-data";
 
 type FileStructure = {
 	[Folder: string]: {
@@ -45,11 +46,24 @@ const App = () => {
 		}
 	}, [snap]);
 
+	// Fetches the User from firebase auth
 	const [user] = useAuthState(auth);
-	const setter = store(state => state.setUser);
+	const [setter, initUserData] = store(state => [
+		state.setUser,
+		state.initUserData,
+	]);
 
+	// Fetches the data for the User from firestore
 	useEffect(() => {
 		setter(user === null ? undefined : user);
+		const name = user?.providerData[0].displayName;
+		(async () => {
+			initUserData(
+				user === null || user === undefined
+					? UserDataInit
+					: await fetchUserData(name === null ? "" : name ?? "")
+			);
+		})();
 	}, [user]);
 
 	return (

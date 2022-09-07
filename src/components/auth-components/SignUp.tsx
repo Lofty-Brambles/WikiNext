@@ -17,7 +17,11 @@ const SignUp = () => {
 	const [pass, setPass] = useState<string>("");
 	const [conPass, setConPass] = useState<string>("");
 
-	const [user, looks] = store(state => [state.user, state.looks]);
+	const [user, darkMode, sans] = store(state => [
+		state.user,
+		state.userData.customise_darkMode,
+		state.userData.customise_sans,
+	]);
 
 	const [createUser, userReg, loading, error] =
 		useCreateUserWithEmailAndPassword(auth);
@@ -43,12 +47,16 @@ const SignUp = () => {
 			) : (
 				<form
 					className={`relative p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-						looks.darkMode ? "bg-slate-900" : "bg-slate-100"
+						darkMode ? "bg-slate-900" : "bg-slate-100"
 					}`}
 				>
 					<AuthHeaders loading={loading} error={error} />
 					{userReg !== undefined && (
-						<div className="w-full p-2 flex justify-center items-center gap-4 rounded border-2 border-green-700">
+						<div
+							className={`w-full p-2 flex justify-center items-center gap-4 rounded border-2 border-green-700 ${
+								sans ? "font-sans" : "font-serif"
+							}`}
+						>
 							<CheckCircle
 								color="green"
 								size={36}

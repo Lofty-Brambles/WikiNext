@@ -10,12 +10,17 @@ import TabbedInfo from "../components/user-components/TabbedInfo";
 const User = () => {
 	const navigate = useNavigate();
 
-	const [user, looks] = store(state => [state.user, state.looks]);
+	const [user, darkMode, sans, sideSpace] = store(state => [
+		state.user,
+		state.userData.customise_darkMode,
+		state.userData.customise_sans,
+		state.userData.customise_sideSpace,
+	]);
 
 	return user === undefined ? (
 		<div
 			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-12px)] flex justify-center items-center gap-4 overflow-y-scroll ${
-				looks.darkMode ? "bg-gray-600" : "bg-zinc-200"
+				darkMode ? "bg-gray-600" : "bg-zinc-200"
 			}`}
 		>
 			<img
@@ -25,7 +30,7 @@ const User = () => {
 			/>
 			<div
 				className={`p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-					looks.darkMode ? "bg-slate-900 text-white" : "bg-slate-100"
+					darkMode ? "bg-slate-900 text-white" : "bg-slate-100"
 				}`}
 			>
 				<p className="text-center">
@@ -48,15 +53,15 @@ const User = () => {
 	) : (
 		<div
 			className={`box-border w-full h-[calc(100%-84px)] lg:w-[calc(80vw-12px)] py-10 flex justify-start items-center flex-col gap-8 overflow-y-scroll ${
-				looks.darkMode ? "bg-[#0d1117] text-white" : "bg-slate-100"
-			} ${looks.sans ? "sans" : "font-serif"} ${
+				darkMode ? "bg-[#0d1117] text-white" : "bg-slate-100"
+			} ${sans ? "sans" : "font-serif"} ${
 				// eslint-disable-next-line no-nested-ternary
-				looks.sideSpace === "sm"
+				sideSpace === "sm"
 					? "px-10"
 					: // eslint-disable-next-line no-nested-ternary
-					looks.sideSpace === "md"
+					sideSpace === "md"
 					? "px-20"
-					: looks.sideSpace === "lg"
+					: sideSpace === "lg"
 					? "px-[7.5rem]"
 					: ""
 			}`}

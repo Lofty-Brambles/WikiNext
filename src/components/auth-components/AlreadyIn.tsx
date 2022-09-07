@@ -5,13 +5,17 @@ import store from "../../store";
 import Buttons from "../input-components/Button";
 
 const AlreadyIn = () => {
-	const [userSetter, looks] = store(state => [state.setUser, state.looks]);
+	const [userSetter, darkMode, sans] = store(state => [
+		state.setUser,
+		state.userData.customise_darkMode,
+		state.userData.customise_sans,
+	]);
 
 	return (
 		<div
 			className={`p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-				looks.darkMode ? "bg-slate-900 text-white" : "bg-slate-100"
-			}`}
+				darkMode ? "bg-slate-900 text-white" : "bg-slate-100"
+			} ${sans ? "font-sans" : ""}`}
 		>
 			<p className="text-center">✅ You are already logged in!</p>
 			<Buttons

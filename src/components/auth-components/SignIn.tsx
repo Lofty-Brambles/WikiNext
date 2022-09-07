@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GitHub, Mail } from "react-feather";
 import { auth } from "../../firebase/firebase-init";
-import useLoginMethods from "../../hooks/useLoginMethod";
+import useLoginMethods from "../../hooks-&-utils/useLoginMethod";
 import store from "../../store";
 import Buttons from "../input-components/Button";
 import LoginInputs from "../input-components/LoginInput";
@@ -17,7 +17,10 @@ const SignIn = () => {
 	// Hook for log-in methods
 	const [signInEmail, signInGmail, signInGh, loading, error] =
 		useLoginMethods(auth);
-	const [looks, user] = store(state => [state.looks, state.user]);
+	const [darkMode, user] = store(state => [
+		state.userData.customise_darkMode,
+		state.user,
+	]);
 
 	const signInValidation = () => {
 		const emailIsValid =
@@ -37,7 +40,7 @@ const SignIn = () => {
 			) : (
 				<form
 					className={`relative p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-						looks.darkMode ? "bg-slate-900" : "bg-slate-100"
+						darkMode ? "bg-slate-900" : "bg-slate-100"
 					}`}
 				>
 					<AuthHeaders error={error} loading={loading} />
@@ -75,7 +78,7 @@ const SignIn = () => {
 					/>
 					<h6
 						className={`font-mono relative before:absolute before:right-8 before:top-[calc(50%-1px)] before:w-[100px] before:h-px after:absolute after:left-8 after:top-[calc(50%-1px)] after:w-[100px] after:h-px ${
-							looks.darkMode
+							darkMode
 								? "text-gray-400 before:bg-gray-400 after:bg-gray-400"
 								: "text-gray-700 before:bg-gray-700 after:bg-gray-700"
 						}`}
@@ -114,10 +117,8 @@ const SignIn = () => {
 						}}
 						disabled={false}
 						colors={{
-							main: looks.darkMode
-								? "bg-gray-500"
-								: "bg-gray-900",
-							hover: looks.darkMode
+							main: darkMode ? "bg-gray-500" : "bg-gray-900",
+							hover: darkMode
 								? "hover:bg-gray-400"
 								: "hover:bg-gray-800",
 						}}

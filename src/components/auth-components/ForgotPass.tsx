@@ -17,7 +17,10 @@ const ForgotPass = () => {
 	const [sendPasswordResetEmail, loading, error] =
 		useSendPasswordResetEmail(auth);
 
-	const [user, looks] = store(state => [state.user, state.looks]);
+	const [user, darkMode] = store(state => [
+		state.user,
+		state.userData.customise_darkMode,
+	]);
 
 	const emailValidation = () =>
 		!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -32,7 +35,7 @@ const ForgotPass = () => {
 			) : (
 				<form
 					className={`relative p-8 my-auto mdx:mr-8 flex flex-col items-center gap-3 w-[300px] sm:w-[357px] border-2 border-neutral-400 rounded-sm ${
-						looks.darkMode ? "bg-slate-900" : "bg-slate-100"
+						darkMode ? "bg-slate-900" : "bg-slate-100"
 					}`}
 				>
 					<AuthHeaders loading={loading} error={error as AuthError} />
